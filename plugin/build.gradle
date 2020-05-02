@@ -1,0 +1,10 @@
+subprojects {
+    dependencies {
+        api(
+                project(':core'),
+                project(':spring'),
+                project(':commons'),
+                project(':exception')
+        )
+    }
+}

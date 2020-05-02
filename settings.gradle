@@ -1,0 +1,31 @@
+rootProject.name = 'crossway'
+
+//include ':boot:gateway'
+//include ':boot:starters:gateway'
+//include ':boot:starters:sofarpc-plugin'
+//include ':boot:starters:tibcorv-plugin'
+
+include 'core'
+include 'commons'
+include 'exception'
+include 'spring'
+
+//include ':test:app'
+//include ':test:send'
+//include ':test:listener'
+//include ':test:listener-api'
+//
+//include ':plugin:http'
+//include ':plugin:tibcorv'
+include ':plugin:sofa:sofarpc'
+include ':plugin:sofa:sofarpc-api'
+
+//project(':boot:starters').children.each { project ->
+//    changProjectName(project, project.name + "-spring-boot-starter")
+//}
+
+def changProjectName(ProjectDescriptor project, String name) {
+    File path = new File(project.projectDir.toString())
+    project.name = name
+    project.setProjectDir(path)
+}

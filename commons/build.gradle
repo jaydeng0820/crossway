@@ -1,0 +1,8 @@
+dependencies {
+    implementation(
+            libraries.'common-pool2',
+            project(':exception')
+    )
+
+
+}

@@ -1,0 +1,68 @@
+// 引入插件
+apply plugin: 'java-library'
+
+apply from: rootProject.file('gradle/libraries.gradle')
+
+jar.enabled = true
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+// 检查参数
+assert hasProperty('targetJavaVersion'): "Set the property 'targetJavaVersion' in your your gradle.properties to '1.6' or '1.7'"
+
+sourceCompatibility = JavaVersion.toVersion(targetJavaVersion)
+targetCompatibility = JavaVersion.toVersion(targetJavaVersion)
+
+// 编译Jar的编码格式
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+// 编译Test的编码格式
+compileTestJava.options.encoding = 'UTF-8'
+// 编译Javadoc的编码格式
+javadoc.options.encoding('UTF-8')
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
+jar.baseName("crossway-" + project.name)
+javadocJar.baseName("crossway-" + project.name)
+sourcesJar.baseName("crossway-" + project.name)
+
+// Testing
+tasks.withType(Test.class).all { task ->
+    task.jvmArgs += [
+            '-XX:+HeapDumpOnOutOfMemoryError',
+            "-XX:HeapDumpPath=${file("${buildDir}/OOM-dump.hprof").absolutePath}",
+            '-XX:MetaspaceSize=256M'
+    ]
+    task.maxHeapSize = '2G'
+}
+
+jar {
+    Map<String, Object> att = new TreeMap<>();
+    att.put("Automatic-Module-Name", project.getName().replace("-", "."));
+    att.put("Build-Jdk-Spec", project.property("sourceCompatibility"));
+    att.put("Built-By", "SESA-Gateway");
+    att.put("Implementation-Title", "SESA Gateway Projects");
+    att.put("Implementation-Version", project.getVersion());
+    manifest {
+        attributes(att)
+    }
+}
+
+dependencies {
+    api(
+            libraries.'slf4j',
+            libraries.'jackson-core',
+            libraries.'jackson-databind',
+            libraries.'jackson-annotations',
+            libraries.'jackson-dataformat-xml'
+    )
+}

@@ -1,0 +1,39 @@
+apply from: rootProject.file('gradle/java-module.gradle')
+
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        mavenJar(MavenPublication) {
+            groupId = project.group
+            artifactId = "sesa-" + project.name
+            version = project.version
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+        }
+    }
+
+    repositories {
+        if (!nexusUsername.isEmpty() && !nexusPassword.isEmpty()) {
+            maven {
+                name 'fa'
+                def releasesRepoUrl = "http://www.fa-software.com:9081/nexus/content/repositories/mycim_Release"
+                def snapshotsRepoUrl = "http://www.fa-software.com:9081/nexus/content/repositories/mycim_snapshot"
+                url version.endsWith("SNAPSHOT") ? snapshotsRepoUrl : releasesRepoUrl
+
+                credentials {
+                    username = nexusUsername
+                    password = nexusPassword
+                }
+            }
+        }
+    }
+}
+

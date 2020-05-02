@@ -1,0 +1,9 @@
+dependencies {
+    implementation(
+            libraries.'common-pool2',
+            project(':commons'),
+            project(':spring'),
+            project(':exception')
+    )
+
+}

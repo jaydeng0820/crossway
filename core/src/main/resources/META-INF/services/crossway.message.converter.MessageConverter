@@ -1,0 +1,5 @@
+crossway.message.converter.BodyObjectResponseConverter
+crossway.message.converter.DirectMessageConverter
+crossway.message.converter.DirectStringRequestConverter
+crossway.message.converter.StringRequestConverter
+crossway.message.converter.StringResponseConverter
