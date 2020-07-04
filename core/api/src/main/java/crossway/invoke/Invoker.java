@@ -14,41 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package crossway.exception;
+package crossway.invoke;
+
+import crossway.core.request.CrossWayRequest;
+import crossway.core.response.CrossWayResponse;
+import crossway.exception.CrossWayException;
 
 /**
- * SOFA RPC Exception, all rpc exception will extends it
+ * 调用器
  *
- * @author
+ * @author iamcyw
  */
-public class CrossWayException extends RuntimeException {
+public interface Invoker {
 
-    private static final long serialVersionUID = -6354359417814605070L;
     /**
-     * 异常类型
+     * 执行调用
+     *
+     * @param request 请求
+     * @return CrossWayRequest 响应
+     * @throws CrossWayException rpc异常
      */
-    protected int errorType = ErrorType.UNKNOWN;
-
-    protected CrossWayException() {
-
-    }
-
-    public CrossWayException(int errorType, String message) {
-        super(message);
-        this.errorType = errorType;
-    }
-
-    public CrossWayException(int errorType, Throwable cause) {
-        super(cause);
-        this.errorType = errorType;
-    }
-
-    public CrossWayException(int errorType, String message, Throwable cause) {
-        super(message, cause);
-        this.errorType = errorType;
-    }
-
-    public int getErrorType() {
-        return errorType;
-    }
+    CrossWayResponse invoke(CrossWayRequest request) throws CrossWayException;
 }

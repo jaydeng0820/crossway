@@ -1,35 +1,21 @@
 /**
  * 依赖包的定义。
- * 优先继承spring中的依赖版本
  */
-apply plugin: "io.spring.dependency-management"
-
-dependencyManagement {
-    imports {
-        mavenBom('io.spring.platform:platform-bom:1.0.1.RELEASE') {
-            bomProperty(
-                    'commons-pool2:2.8.0',
-                    'spark-core:2.8.0'
-            )
-        }
-    }
-}
-
 // 各种可能会用到的jar包
 ext.libraries = [
-        "common-pool2"          : "org.apache.commons:commons-pool2",
+        "common-pool2"          : "org.apache.commons:commons-pool2:2.8.0",
 
-        "spark-core"            : "com.sparkjava:spark-core",
+        "spark-core"            : "com.sparkjava:spark-core:2.8.0",
 
         //logback
-        "logback"               : "ch.qos.logback:logback-core",
-        "slf4j"                 : "org.slf4j:slf4j-api",
+        "logback"               : "ch.qos.logback:logback-core:1.2.3",
+        "slf4j"                 : "org.slf4j:slf4j-api:1.7.30",
 
         //jackson
-        "jackson-core"          : "com.fasterxml.jackson.core:jackson-core",
-        "jackson-databind"      : "com.fasterxml.jackson.core:jackson-databind",
-        "jackson-annotations"   : "com.fasterxml.jackson.core:jackson-annotations",
-        "jackson-dataformat-xml": "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:" + dependencyManagement.importedProperties.get("jackson.version"),
+        "jackson-core"          : "com.fasterxml.jackson.core:jackson-core:2.11.0",
+        "jackson-databind"      : "com.fasterxml.jackson.core:jackson-databind:2.11.0",
+        "jackson-annotations"   : "com.fasterxml.jackson.core:jackson-annotations:2.11.0",
+        "jackson-dataformat-xml": "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.0",
 
 
         // commons
@@ -41,8 +27,6 @@ ext.libraries = [
         "commons-fileupload"    : "commons-fileupload:commons-fileupload:1.1.1",
         "commons-beans"         : "commons-beanutils:commons-beanutils:1.9.3",
         "commons-dbcp2"         : "org.apache.commons:commons-dbcp2:2.0",
-
-        "spring-context"        : "org.springframework:spring-context",
 
         "sofa-boot"             : "com.alipay.sofa:runtime-sofa-boot-starter:3.3.2",
         "sofa-rpc"              : "com.alipay.sofa:rpc-sofa-boot-starter:6.0.4",

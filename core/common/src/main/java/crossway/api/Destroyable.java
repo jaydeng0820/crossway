@@ -14,41 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package crossway.exception;
+package crossway.api;
 
 /**
- * SOFA RPC Exception, all rpc exception will extends it
+ * <p>可销毁的接口</p>
  *
- * @author
+ * @author iamcyw
  */
-public class CrossWayException extends RuntimeException {
+public interface Destroyable {
 
-    private static final long serialVersionUID = -6354359417814605070L;
     /**
-     * 异常类型
+     * 销毁接口
      */
-    protected int errorType = ErrorType.UNKNOWN;
+    public void destroy();
 
-    protected CrossWayException() {
+    /**
+     * Do destroy with hook.
+     *
+     * @param hook DestroyHook
+     */
+    public void destroy(DestroyHook hook);
 
-    }
+    /**
+     * 销毁钩子
+     */
+    interface DestroyHook {
+        /**
+         * 销毁前要做的事情
+         */
+        public void preDestroy();
 
-    public CrossWayException(int errorType, String message) {
-        super(message);
-        this.errorType = errorType;
-    }
-
-    public CrossWayException(int errorType, Throwable cause) {
-        super(cause);
-        this.errorType = errorType;
-    }
-
-    public CrossWayException(int errorType, String message, Throwable cause) {
-        super(message, cause);
-        this.errorType = errorType;
-    }
-
-    public int getErrorType() {
-        return errorType;
+        /**
+         * 銷毀后要做的事情
+         */
+        public void postDestroy();
     }
 }

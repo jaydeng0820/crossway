@@ -14,41 +14,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package crossway.exception;
+package crossway.struct;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * SOFA RPC Exception, all rpc exception will extends it
+ * 计数器，从0开始，保证正数。
  *
- * @author
+ * @author iamcyw
  */
-public class CrossWayException extends RuntimeException {
+public class PositiveAtomicCounter {
+    private static final int    MASK = 0x7FFFFFFF;
+    private final AtomicInteger atom;
 
-    private static final long serialVersionUID = -6354359417814605070L;
-    /**
-     * 异常类型
-     */
-    protected int errorType = ErrorType.UNKNOWN;
-
-    protected CrossWayException() {
-
+    public PositiveAtomicCounter() {
+        atom = new AtomicInteger(0);
     }
 
-    public CrossWayException(int errorType, String message) {
-        super(message);
-        this.errorType = errorType;
+    public final int incrementAndGet() {
+        return atom.incrementAndGet() & MASK;
     }
 
-    public CrossWayException(int errorType, Throwable cause) {
-        super(cause);
-        this.errorType = errorType;
+    public final int getAndIncrement() {
+        return atom.getAndIncrement() & MASK;
     }
 
-    public CrossWayException(int errorType, String message, Throwable cause) {
-        super(message, cause);
-        this.errorType = errorType;
+    public int get() {
+        return atom.get() & MASK;
     }
 
-    public int getErrorType() {
-        return errorType;
-    }
 }

@@ -14,41 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package crossway.exception;
+package crossway.invoke;
+
+import crossway.annotation.Unstable;
+
+import java.io.Closeable;
 
 /**
- * SOFA RPC Exception, all rpc exception will extends it
+ * <p>面向用户的，回调的抽象类，实现通知方法，指定传递对象</p>
+ * <p>
  *
- * @author
+ * @param <Q> the request parameter
+ * @param <S> the response parameter
+ * @author iamcyw
  */
-public class CrossWayException extends RuntimeException {
+@Unstable
+public interface Callback<Q, S> extends Closeable {
 
-    private static final long serialVersionUID = -6354359417814605070L;
     /**
-     * 异常类型
+     * 回调通知
+     *
+     * @param result 通知对象
+     * @return 返回值对象 s
      */
-    protected int errorType = ErrorType.UNKNOWN;
-
-    protected CrossWayException() {
-
-    }
-
-    public CrossWayException(int errorType, String message) {
-        super(message);
-        this.errorType = errorType;
-    }
-
-    public CrossWayException(int errorType, Throwable cause) {
-        super(cause);
-        this.errorType = errorType;
-    }
-
-    public CrossWayException(int errorType, String message, Throwable cause) {
-        super(message, cause);
-        this.errorType = errorType;
-    }
-
-    public int getErrorType() {
-        return errorType;
-    }
+    S notify(Q result);
 }

@@ -14,41 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package crossway.exception;
+package crossway.module;
+
+import crossway.ext.api.Extensible;
 
 /**
- * SOFA RPC Exception, all rpc exception will extends it
+ * 模块扩展，RPC上下文会自动加载，例如tracer，metric，都属于此类扩展。
  *
- * @author
+ * @author iamcyw
  */
-public class CrossWayException extends RuntimeException {
+@Extensible
+public interface Module {
 
-    private static final long serialVersionUID = -6354359417814605070L;
     /**
-     * 异常类型
+     * 是否需要满足加载条件
+     *
+     * @return 是否
      */
-    protected int errorType = ErrorType.UNKNOWN;
+    boolean needLoad();
 
-    protected CrossWayException() {
+    /**
+     * 安装模板
+     */
+    void install();
 
-    }
-
-    public CrossWayException(int errorType, String message) {
-        super(message);
-        this.errorType = errorType;
-    }
-
-    public CrossWayException(int errorType, Throwable cause) {
-        super(cause);
-        this.errorType = errorType;
-    }
-
-    public CrossWayException(int errorType, String message, Throwable cause) {
-        super(message, cause);
-        this.errorType = errorType;
-    }
-
-    public int getErrorType() {
-        return errorType;
-    }
+    /**
+     * 卸载模块
+     */
+    void uninstall();
 }
