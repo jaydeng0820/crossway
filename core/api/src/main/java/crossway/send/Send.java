@@ -10,7 +10,7 @@ import java.util.UUID;
 /**
  * @author iamcyw
  **/
-@Extensible
+@Extensible(singleton = false)
 public abstract class Send implements Invoker {
 
     private final SenderConfig senderConfig;

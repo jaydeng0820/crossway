@@ -18,6 +18,11 @@ public class TextNode extends ValueNode {
 
     @Override
     public String asText() {
-        return null;
+        return value;
+    }
+
+    @Override
+    public String textValue() {
+        return value;
     }
 }

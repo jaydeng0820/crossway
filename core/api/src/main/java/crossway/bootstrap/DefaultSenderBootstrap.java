@@ -25,7 +25,7 @@ public class DefaultSenderBootstrap extends SenderBootstrap {
     @Override
     public Send refer() {
         if (send == null) {
-            send = SendFactory.getSend(getSenderConfig().getProtocol());
+            send = SendFactory.getSend(getSenderConfig());
         }
 
         return send;

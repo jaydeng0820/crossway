@@ -23,7 +23,7 @@ public class SenderInvoker extends FilterInvoker {
     public CrossWayResponse invoke(CrossWayRequest request) throws CrossWayException {
         CrossWayResponse response = new CrossWayResponse();
         try {
-            response = SendFactory.getSend(senderConfig.getProtocol()).invoke(request);
+            response = senderConfig.refer().invoke(request);
         } catch (CrossWayRuntimeException e) {
             response.setError(e);
             response.setErrorMsg(e.getMessage());

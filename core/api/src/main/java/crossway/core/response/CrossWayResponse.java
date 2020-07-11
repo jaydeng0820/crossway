@@ -179,6 +179,7 @@ public final class CrossWayResponse implements Serializable {
     }
 
     public void setError(Exception error) {
+        this.isError = true;
         this.error = error;
     }
 

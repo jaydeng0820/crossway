@@ -5,7 +5,7 @@ import crossway.ext.api.Extensible;
 
 import java.util.Map;
 
-@Extensible(coded = true)
+@Extensible
 public interface Serializer {
 
     Node encode(Object object, Map<String, Object> context);
