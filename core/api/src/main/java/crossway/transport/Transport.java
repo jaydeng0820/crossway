@@ -37,7 +37,7 @@ public class Transport {
 
     public FilterInvoker getSend() {
         if (filterInvoker == null) {
-            filterInvoker = FilterChainFactory.filterChain(new SenderInvoker(senderConfig), senderConfig, filters);
+            filterInvoker = FilterChainFactory.filterChain(new SenderInvoker(senderConfig), filters);
         }
         return filterInvoker;
     }

@@ -26,6 +26,8 @@ public class SenderConfig extends AbstractServiceConfig<SenderConfig> implements
      */
     protected String protocol;
 
+    protected String serializerType;
+
     /**
      * 启动器
      */
@@ -74,5 +76,13 @@ public class SenderConfig extends AbstractServiceConfig<SenderConfig> implements
 
     public void setTransport(Transport transport) {
         this.transport = transport;
+    }
+
+    public String getSerializerType() {
+        return serializerType;
+    }
+
+    public void setSerializerType(String serializerType) {
+        this.serializerType = serializerType;
     }
 }

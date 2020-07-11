@@ -1,6 +1,5 @@
 package crossway.filter;
 
-import crossway.config.AbstractServiceConfig;
 import crossway.exception.CrossWayRuntimeException;
 import crossway.ext.ExtensionClass;
 import crossway.ext.ExtensionLoaderFactory;
@@ -25,11 +24,8 @@ public class FilterChainFactory {
      *     包装过滤器列表
      * @param lastInvoker
      *     最终过滤器
-     * @param config
-     *     接口配置
      */
-    public static FilterInvoker filterChain(FilterInvoker lastInvoker, AbstractServiceConfig config,
-                                            String... loadFilters) {
+    public static FilterInvoker filterChain(FilterInvoker lastInvoker, String... loadFilters) {
         FilterInvoker invokerChain = lastInvoker;
 
         for (int i = loadFilters.length - 1; i >= 0; i--) {
@@ -37,7 +33,7 @@ public class FilterChainFactory {
                 String filterId = loadFilters[i];
                 Filter filter = ALL_FILTER.get(filterId).getExtInstance();
                 if (filter.needToLoad(invokerChain)) {
-                    invokerChain = new FilterInvoker(filter, invokerChain, config);
+                    invokerChain = new FilterInvoker(filter, invokerChain);
                 }
             } catch (CrossWayRuntimeException e) {
                 log.error(LogCodes.getLog(LogCodes.ERROR_FILTER_CONSTRUCT), e);

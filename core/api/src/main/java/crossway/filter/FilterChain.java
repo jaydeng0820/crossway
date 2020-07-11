@@ -1,6 +1,5 @@
 package crossway.filter;
 
-import crossway.config.AbstractServiceConfig;
 import crossway.core.request.CrossWayRequest;
 import crossway.core.response.CrossWayResponse;
 import crossway.exception.CrossWayException;
@@ -13,16 +12,13 @@ import crossway.log.LogCodes;
 import crossway.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author iamcyw
  **/
 @Slf4j
+@Deprecated
 public class FilterChain implements Invoker {
 
     private final static Map<String, ExtensionClass<Filter>> AUTO_ACTIVES = Collections.synchronizedMap(
@@ -50,10 +46,8 @@ public class FilterChain implements Invoker {
      *     包装过滤器列表
      * @param lastInvoker
      *     最终过滤器
-     * @param config
-     *     接口配置
      */
-    public FilterChain(List<Filter> filters, FilterInvoker lastInvoker, AbstractServiceConfig config) {
+    public FilterChain(List<Filter> filters, FilterInvoker lastInvoker) {
         invokerChain = lastInvoker;
         if (CommonUtils.isNotEmpty(filters)) {
             loadedFilters = new ArrayList<>();
@@ -61,7 +55,7 @@ public class FilterChain implements Invoker {
                 try {
                     Filter filter = filters.get(i);
                     if (filter.needToLoad(invokerChain)) {
-                        invokerChain = new FilterInvoker(filter, invokerChain, config);
+                        invokerChain = new FilterInvoker(filter, invokerChain);
                         loadedFilters.add(filter);
                     }
                 } catch (CrossWayRuntimeException e) {

@@ -16,6 +16,8 @@
  */
 package crossway.core.response;
 
+import crossway.codec.node.Node;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,10 +41,12 @@ public final class CrossWayResponse implements Serializable {
      */
     private String errorMsg;
 
+    private Exception error;
+
     /**
-     * 业务返回或者业务异常
+     * 业务返回
      */
-    private Object appResponse;
+    private Node data;
 
     /**
      * extensional properties
@@ -55,26 +59,6 @@ public final class CrossWayResponse implements Serializable {
      * 序列化类型
      */
     private transient byte serializeType;
-
-
-    /**
-     * Gets app response.
-     *
-     * @return the app response
-     */
-    public Object getAppResponse() {
-        return appResponse;
-    }
-
-    /**
-     * Sets app response.
-     *
-     * @param response
-     *     the response
-     */
-    public void setAppResponse(Object response) {
-        appResponse = response;
-    }
 
     /**
      * Is error boolean.
@@ -190,13 +174,19 @@ public final class CrossWayResponse implements Serializable {
         return this;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder(128);
-        sb.append("SofaResponse[");
-        sb.append("sofa-rpc exception=").append(isError).append(", ");
-        sb.append("sofa-rpc errorMsg=").append(errorMsg).append(", ");
-        sb.append("appResponse=").append(appResponse).append("]");
-        return sb.toString();
+    public Exception getError() {
+        return error;
+    }
+
+    public void setError(Exception error) {
+        this.error = error;
+    }
+
+    public Node getData() {
+        return data;
+    }
+
+    public void setData(Node data) {
+        this.data = data;
     }
 }

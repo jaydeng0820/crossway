@@ -27,6 +27,8 @@ public class ListenerConfig extends AbstractServiceConfig<ListenerConfig> implem
      */
     protected String bootstrap;
 
+    protected String serializerType;
+
     protected ListenerBootstrap listenerBootstrap;
 
     protected Transport transport;
@@ -67,5 +69,13 @@ public class ListenerConfig extends AbstractServiceConfig<ListenerConfig> implem
 
     public void setTransport(Transport transport) {
         this.transport = transport;
+    }
+
+    public String getSerializerType() {
+        return serializerType;
+    }
+
+    public void setSerializerType(String serializerType) {
+        this.serializerType = serializerType;
     }
 }

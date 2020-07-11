@@ -26,22 +26,12 @@ public class FilterInvoker implements Invoker {
      */
     protected FilterInvoker invoker;
 
-    protected AbstractServiceConfig config;
-
-    /**
-     * 如果无需下一层过滤器
-     *
-     * @param config
-     *     过滤器所在的接口配置
-     */
-    protected FilterInvoker(AbstractServiceConfig config) {
-        this.config = config;
+    public FilterInvoker() {
     }
 
-    public FilterInvoker(Filter nextFilter, FilterInvoker invoker, AbstractServiceConfig config) {
+    public FilterInvoker(Filter nextFilter, FilterInvoker invoker) {
         this.nextFilter = nextFilter;
         this.invoker = invoker;
-        this.config = config;
     }
 
     @Override

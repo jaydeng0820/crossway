@@ -1,5 +1,7 @@
 package crossway.impl.send;
 
+import crossway.codec.Serializer;
+import crossway.codec.SerializerFactory;
 import crossway.config.SenderConfig;
 import crossway.core.request.CrossWayRequest;
 import crossway.core.response.CrossWayResponse;
@@ -24,11 +26,19 @@ public class CrossWaySend extends Send {
     }
 
     @Override
+    protected String getDefaultSeriallzerType() {
+        return "string";
+    }
+
+    @Override
     public CrossWayResponse invoke(CrossWayRequest request) throws CrossWayException {
+        Serializer serializer = SerializerFactory.getSerializer(getSeriallzerType());
+
         CrossWayResponse response = new CrossWayResponse();
 
         if (sendEvent != null) {
-            sendEvent.event(request);
+            Object value = sendEvent.event(serializer.decode(request.getData(), null));
+            response.setData(serializer.encode(value, null));
         }
 
         return response;

@@ -13,26 +13,25 @@ import crossway.send.SendFactory;
  **/
 public class SenderInvoker extends FilterInvoker {
 
+    protected final SenderConfig senderConfig;
+
     public SenderInvoker(SenderConfig config) {
-        super(config);
+        this.senderConfig = config;
     }
 
     @Override
     public CrossWayResponse invoke(CrossWayRequest request) throws CrossWayException {
         CrossWayResponse response = new CrossWayResponse();
         try {
-            response = SendFactory.getSend(getSenderConfig().getProtocol()).invoke(request);
+            response = SendFactory.getSend(senderConfig.getProtocol()).invoke(request);
         } catch (CrossWayRuntimeException e) {
-            response.setAppResponse(e);
+            response.setError(e);
             response.setErrorMsg(e.getMessage());
         } catch (Throwable e) {
-            response.setAppResponse(e);
-            response.setAppResponse(new CrossWayException(WayErrorType.SERVER_SEND, e));
+            response.setErrorMsg(e.getMessage());
+            response.setError(new CrossWayException(WayErrorType.SERVER_SEND, e));
         }
         return response;
     }
 
-    public SenderConfig getSenderConfig() {
-        return (SenderConfig) this.config;
-    }
 }

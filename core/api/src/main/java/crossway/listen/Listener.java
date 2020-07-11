@@ -5,6 +5,7 @@ import crossway.core.request.CrossWayRequest;
 import crossway.core.response.CrossWayResponse;
 import crossway.ext.api.Extensible;
 import crossway.invoke.Invoker;
+import crossway.utils.StringUtils;
 
 import java.util.UUID;
 
@@ -33,5 +34,12 @@ public abstract class Listener implements Invoker {
     public int getId() {
         return id;
     }
+
+    protected String getSeriallzerType() {
+        return StringUtils.isNotEmpty(getConfig().getSerializerType()) ? getConfig().getSerializerType() :
+               getDefaultSeriallzerType();
+    }
+
+    protected abstract String getDefaultSeriallzerType();
 
 }

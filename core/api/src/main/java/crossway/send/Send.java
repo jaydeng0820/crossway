@@ -3,6 +3,7 @@ package crossway.send;
 import crossway.config.SenderConfig;
 import crossway.ext.api.Extensible;
 import crossway.invoke.Invoker;
+import crossway.utils.StringUtils;
 
 import java.util.UUID;
 
@@ -19,6 +20,17 @@ public abstract class Send implements Invoker {
     protected Send(SenderConfig senderConfig) {
         this.senderConfig = senderConfig;
     }
+
+    public SenderConfig getConfig() {
+        return senderConfig;
+    }
+
+    protected String getSeriallzerType() {
+        return StringUtils.isNotEmpty(getConfig().getSerializerType()) ? getConfig().getSerializerType() :
+               getDefaultSeriallzerType();
+    }
+
+    protected abstract String getDefaultSeriallzerType();
 
     public int getId() {
         return id;

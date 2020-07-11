@@ -16,9 +16,8 @@
  */
 package crossway.core.request;
 
-import crossway.common.WayConstants;
+import crossway.codec.node.Node;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,23 +30,25 @@ import java.util.Map;
  */
 public class CrossWayRequest extends RequestBase {
 
-    private static final long   serialVersionUID = 7329530374415722876L;
-
-    /**
-     * Target app name. If progress of 'AppA' want to call the progress which contains two apps('AppB1' and 'AppB2'),
-     * You need specified the target app name here. such as 'AppB2'
-     */
-    private String              targetAppName;
+    private static final long serialVersionUID = 7329530374415722876L;
 
     /**
      * Extensional properties of request
      */
-    private Map<String, Object> requestProps;
+    private           Map<String, Object> requestProps;
+    /**
+     * 序列化类型
+     */
+    private transient String              serializeType;
+
+    private Node data;
 
     /**
      * Gets request prop.
      *
-     * @param key the key
+     * @param key
+     *     the key
+     *
      * @return request prop
      */
     public Object getRequestProp(String key) {
@@ -57,8 +58,10 @@ public class CrossWayRequest extends RequestBase {
     /**
      * Add request prop.
      *
-     * @param key   the key
-     * @param value the value
+     * @param key
+     *     the key
+     * @param value
+     *     the value
      */
     public void addRequestProp(String key, Object value) {
         if (key == null || value == null) {
@@ -73,7 +76,8 @@ public class CrossWayRequest extends RequestBase {
     /**
      * Remove request prop.
      *
-     * @param key the key
+     * @param key
+     *     the key
      */
     public void removeRequestProp(String key) {
         if (key == null) {
@@ -87,7 +91,8 @@ public class CrossWayRequest extends RequestBase {
     /**
      * Add request props.
      *
-     * @param map the map
+     * @param map
+     *     the map
      */
     public void addRequestProps(Map<String, Object> map) {
         if (map == null || map.isEmpty()) {
@@ -108,154 +113,11 @@ public class CrossWayRequest extends RequestBase {
         return requestProps;
     }
 
-    /**
-     * Gets target app name.
-     *
-     * @return the target app name
-     */
-    public String getTargetAppName() {
-        return targetAppName;
+    public Node getData() {
+        return data;
     }
 
-    /**
-     * Sets target app name.
-     *
-     * @param targetAppName the target app name
-     */
-    public void setTargetAppName(String targetAppName) {
-        this.targetAppName = targetAppName;
-    }
-
-    //====================== 下面是非传递属性 ===============
-    /**
-     * 方法对象(为了减少反射缓存）
-     */
-    private transient Method               method;
-
-    /**
-     * 接口名
-     */
-    private transient String               interfaceName;
-
-    /**
-     * 序列化类型
-     */
-    private transient byte                 serializeType;
-
-    /**
-     * 调用类型（客户端使用）
-     */
-    private transient String               invokeType;
-
-    /**
-     * 用户层请求超时，调用级别（客户端使用）
-     */
-    private transient Integer              timeout;
-
-    /**
-     * Gets method.
-     *
-     * @return the method
-     */
-    public Method getMethod() {
-        return method;
-    }
-
-    /**
-     * Sets method.
-     *
-     * @param method the method
-     */
-    public void setMethod(Method method) {
-        this.method = method;
-    }
-
-    /**
-     * Gets serialize type.
-     *
-     * @return the serialize type
-     */
-    public byte getSerializeType() {
-        return serializeType;
-    }
-
-    /**
-     * Sets serialize type.
-     *
-     * @param serializeType the serialize type
-     * @return the serialize type
-     */
-    public CrossWayRequest setSerializeType(byte serializeType) {
-        this.serializeType = serializeType;
-        return this;
-    }
-
-    /**
-     * Gets invoke type.
-     *
-     * @return the invoke type
-     */
-    public String getInvokeType() {
-        return invokeType;
-    }
-
-    /**
-     * Sets invoke type.
-     *
-     * @param invokeType the invoke type
-     * @return the invoke type
-     */
-    public CrossWayRequest setInvokeType(String invokeType) {
-        this.invokeType = invokeType;
-        return this;
-    }
-
-    /**
-     * Gets interface name.
-     *
-     * @return the interface name
-     */
-    public String getInterfaceName() {
-        return interfaceName;
-    }
-
-    /**
-     * Sets interface name.
-     *
-     * @param interfaceName the interface name
-     */
-    public void setInterfaceName(String interfaceName) {
-        this.interfaceName = interfaceName;
-    }
-
-
-    /**
-     * Gets timeout.
-     *
-     * @return the timeout
-     */
-    public Integer getTimeout() {
-        return timeout;
-    }
-
-    /**
-     * Sets timeout.
-     *
-     * @param timeout the timeout
-     * @return the timeout
-     */
-    public CrossWayRequest setTimeout(Integer timeout) {
-        this.timeout = timeout;
-        return this;
-    }
-
-    /**
-     * 是否异步请求
-     *
-     * @return 如果是Future和Callback，是异步请求
-     */
-    public boolean isAsync() {
-        return invokeType != null && (WayConstants.INVOKER_TYPE_CALLBACK.equals(invokeType)
-            || WayConstants.INVOKER_TYPE_FUTURE.equals(invokeType));
+    public void setData(Node data) {
+        this.data = data;
     }
 }
