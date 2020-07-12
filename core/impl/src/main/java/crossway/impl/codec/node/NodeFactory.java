@@ -64,7 +64,7 @@ public class NodeFactory implements NodeCreator, Serializable {
 
     @Override
     public NumericNode numberNode(int v) {
-        return null;
+        return new IntNode(v);
     }
 
     @Override

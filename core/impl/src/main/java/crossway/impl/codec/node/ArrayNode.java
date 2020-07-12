@@ -23,6 +23,14 @@ public class ArrayNode extends ContainerNode<ArrayNode> implements Serializable 
         children = new ArrayList<Node>();
     }
 
+    /**
+     * @since 2.8
+     */
+    public ArrayNode(NodeFactory nf, int capacity) {
+        super(nf);
+        children = new ArrayList<Node>(capacity);
+    }
+
     @Override
     public int size() {
         return this.children.size();
@@ -87,10 +95,20 @@ public class ArrayNode extends ContainerNode<ArrayNode> implements Serializable 
     }
 
     /**
-     * @since 2.8
+     * Method for adding specified node at the end of this array.
+     *
+     * @return This node, to allow chaining
      */
-    public ArrayNode(NodeFactory nf, int capacity) {
-        super(nf);
-        children = new ArrayList<Node>(capacity);
+    public ArrayNode add(Node value) {
+        if (value == null) { // let's not store 'raw' nulls but nodes
+            value = nullNode();
+        }
+        _add(value);
+        return this;
+    }
+
+    protected ArrayNode _add(Node node) {
+        children.add(node);
+        return this;
     }
 }

@@ -5,6 +5,10 @@ include(
     ":core:impl",
     ":core:common",
 
+    ":codec:json",
+
+    ":protocol:http"
+
 )
 
 //include ':boot:gateway'

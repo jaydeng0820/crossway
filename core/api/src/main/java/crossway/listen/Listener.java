@@ -1,5 +1,7 @@
 package crossway.listen;
 
+import crossway.codec.Serializer;
+import crossway.codec.SerializerFactory;
 import crossway.config.ListenerConfig;
 import crossway.core.request.CrossWayRequest;
 import crossway.core.response.CrossWayResponse;
@@ -35,9 +37,13 @@ public abstract class Listener implements Invoker {
         return id;
     }
 
-    protected String getSeriallzerType() {
+    protected String getSerializeType() {
         return StringUtils.isNotEmpty(getConfig().getSerializerType()) ? getConfig().getSerializerType() :
                getDefaultSeriallzerType();
+    }
+
+    protected Serializer getSerializer(){
+        return SerializerFactory.getSerializer(getSerializeType());
     }
 
     protected abstract String getDefaultSeriallzerType();

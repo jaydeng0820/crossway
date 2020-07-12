@@ -32,7 +32,7 @@ public class CrossWaySend extends Send {
 
     @Override
     public CrossWayResponse invoke(CrossWayRequest request) throws CrossWayException {
-        Serializer serializer = SerializerFactory.getSerializer(getSeriallzerType());
+        Serializer serializer = getSerializer();
 
         CrossWayResponse response = new CrossWayResponse();
 

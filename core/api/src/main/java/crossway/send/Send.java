@@ -1,5 +1,7 @@
 package crossway.send;
 
+import crossway.codec.Serializer;
+import crossway.codec.SerializerFactory;
 import crossway.config.SenderConfig;
 import crossway.ext.api.Extensible;
 import crossway.invoke.Invoker;
@@ -25,12 +27,16 @@ public abstract class Send implements Invoker {
         return senderConfig;
     }
 
-    protected String getSeriallzerType() {
+    protected String getSerializeType() {
         return StringUtils.isNotEmpty(getConfig().getSerializerType()) ? getConfig().getSerializerType() :
                getDefaultSeriallzerType();
     }
 
     protected abstract String getDefaultSeriallzerType();
+
+    protected Serializer getSerializer(){
+        return SerializerFactory.getSerializer(getSerializeType());
+    }
 
     public int getId() {
         return id;

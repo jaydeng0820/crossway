@@ -33,6 +33,9 @@ public class LogCodes {
     // 02013 bootstrap
     public static final String ERROR_LOAD_HOOK_NULL = "020130001";
 
+    // 02014 codec
+    public static final String ERROR_SERIALIZER_TYPE = "02014001";
+
     // 未知错误
     public static final String LOCALFILEREGISTRY_FAIL_WRITEFILE = "029990001";
     protected static final Map<String, String> LOG_CODES = new ConcurrentHashMap<>();

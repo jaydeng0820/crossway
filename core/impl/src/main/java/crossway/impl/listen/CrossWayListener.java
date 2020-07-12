@@ -24,7 +24,7 @@ public class CrossWayListener extends Listener {
     }
 
     public Object request(Object request) throws Exception {
-        Serializer serializer = SerializerFactory.getSerializer(getSeriallzerType());
+        Serializer serializer = getSerializer();
 
         CrossWayRequest crossWayRequest = new CrossWayRequest();
         crossWayRequest.setData(serializer.encode(request, null));

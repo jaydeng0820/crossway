@@ -17,6 +17,7 @@
 package crossway.core.response;
 
 import crossway.codec.node.Node;
+import crossway.exception.CrossWayException;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -41,7 +42,7 @@ public final class CrossWayResponse implements Serializable {
      */
     private String errorMsg;
 
-    private Exception error;
+    private CrossWayException error;
 
     /**
      * 业务返回
@@ -178,7 +179,7 @@ public final class CrossWayResponse implements Serializable {
         return error;
     }
 
-    public void setError(Exception error) {
+    public void setError(CrossWayException error) {
         this.isError = true;
         this.error = error;
     }
