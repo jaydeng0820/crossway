@@ -94,6 +94,11 @@ public class ArrayNode extends ContainerNode<ArrayNode> implements Serializable 
         return null;
     }
 
+    @Override
+    public boolean isArray() {
+        return true;
+    }
+
     /**
      * Method for adding specified node at the end of this array.
      *

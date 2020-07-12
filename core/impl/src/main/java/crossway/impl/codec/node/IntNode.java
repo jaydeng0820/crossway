@@ -2,6 +2,7 @@ package crossway.impl.codec.node;
 
 
 import crossway.codec.node.NodeType;
+import crossway.utils.StringUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -63,12 +64,17 @@ public class IntNode extends NumericNode {
 
     @Override
     public String asText() {
-        return null;
+        return StringUtils.toString(this.value);
+    }
+
+    @Override
+    public boolean isInt() {
+        return true;
     }
 
     @Override
     public NodeType getNodeType() {
-        return null;
+        return NodeType.NUMBER;
     }
 
     @Override

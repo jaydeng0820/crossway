@@ -172,6 +172,10 @@ public abstract class Node implements Iterable<Node> {
         return getNodeType() == NodeType.BINARY;
     }
 
+    public boolean isArray() {
+        return false;
+    }
+
     /**
      * Method that can be used to check whether this node is a numeric node ({@link #isNumber} would return true) AND
      * its value fits within Java's 32-bit signed integer type, <code>int</code>. Note that floating-point numbers are

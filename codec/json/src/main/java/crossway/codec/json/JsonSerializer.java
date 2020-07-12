@@ -6,6 +6,7 @@ import crossway.exception.CrossWayRuntimeException;
 import crossway.ext.api.Extension;
 import crossway.impl.codec.node.ArrayNode;
 import crossway.impl.codec.node.NodeFactory;
+import crossway.impl.codec.node.NullNode;
 import crossway.impl.codec.node.ObjectNode;
 import crossway.log.LogCodes;
 
@@ -24,6 +25,42 @@ public class JsonSerializer implements Serializer {
 
     @Override
     public Object decode(Node data, Map<String, Object> context) {
+        if (data instanceof NullNode) {
+            return "";
+        } else if (data.isTextual()) { //TODO 去除特殊字符
+            String tmp = data.textValue();
+            return '\"' + tmp.replace("\"", "\\\"").replace("\b", "\\b").replace("\t", "\\t").replace("\r",
+                                                                                                      "\\r").replace(
+                "\f", "\\f").replace("\n", "\\n") + '\"';
+        } else if (data.isBoolean() || data.isNumber()) {
+            return data.asText();
+        } else if (data.isObject()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append('{');
+            data.fields().forEachRemaining(nodeEntry -> {
+                sb.append(decode(NodeFactory.instance.textNode(nodeEntry.getKey()), context)).append(':').append(
+                    decode(nodeEntry.getValue(), context)).append(',');
+            });
+            int last = sb.length() - 1;
+            if (sb.charAt(last) == ',') {
+                sb.deleteCharAt(last);
+            }
+            sb.append('}');
+            return sb.toString();
+        } else if (data.isArray()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append('[');
+            int last = data.size() - 1;
+            for (int i = 0; i <= last; ++i) {
+                sb.append(decode(data.get(i), context)).append(',');
+            }
+            last = sb.length() - 1;
+            if (sb.charAt(last) == ',') {
+                sb.deleteCharAt(last);
+            }
+            sb.append(']');
+            return sb.toString();
+        }
         return null;
     }
 
@@ -112,7 +149,7 @@ public class JsonSerializer implements Serializer {
 
                     case '"': //双引号和单引号
                     case '\'':
-                        StringBuffer sb = new StringBuffer();
+                        StringBuilder sb = new StringBuilder();
                         while (true) {
                             char ch = this.buffer[++position];
                             switch (ch) {
