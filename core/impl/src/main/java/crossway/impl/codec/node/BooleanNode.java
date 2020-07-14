@@ -39,4 +39,9 @@ public class BooleanNode extends ValueNode {
     public boolean asBoolean() {
         return this.value;
     }
+
+    @Override
+    public boolean booleanValue() {
+        return this.value;
+    }
 }

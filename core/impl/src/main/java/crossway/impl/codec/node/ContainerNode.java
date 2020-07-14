@@ -98,7 +98,7 @@ public abstract class ContainerNode<T extends ContainerNode<T>> extends BaseNode
     }
 
     @Override
-    public final NumericNode numberNode(byte v) {
+    public final ValueNode numberNode(byte v) {
         return _nodeFactory.numberNode(v);
     }
 

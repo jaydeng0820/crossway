@@ -1,6 +1,7 @@
 package crossway.codec.node;
 
 public enum  NodeType {
+    DATE,
     ARRAY,
     BINARY,
     BOOLEAN,

@@ -6,6 +6,7 @@ include(
     ":core:common",
 
     ":codec:json",
+    ":codec:clazz",
 
     ":protocol:http"
 

@@ -5,6 +5,7 @@ import crossway.codec.node.Node;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 
 public class NodeFactory implements NodeCreator, Serializable {
     private static final long serialVersionUID = -5792890694292698670L;
@@ -33,7 +34,7 @@ public class NodeFactory implements NodeCreator, Serializable {
         return v ? BooleanNode.getTrue() : BooleanNode.getFalse();
     }
 
-    public Node missingNode(){
+    public Node missingNode() {
         return MissingNode.getInstance();
     }
 
@@ -43,13 +44,14 @@ public class NodeFactory implements NodeCreator, Serializable {
     }
 
     @Override
-    public NumericNode numberNode(byte v) {
-        return null;
+    public ValueNode numberNode(byte value) {
+        return IntNode.valueOf(value);
+
     }
 
     @Override
-    public NumericNode numberNode(Byte value) {
-        return null;
+    public ValueNode numberNode(Byte value) {
+        return (value == null) ? nullNode() : IntNode.valueOf(value.intValue());
     }
 
     @Override
@@ -63,23 +65,23 @@ public class NodeFactory implements NodeCreator, Serializable {
     }
 
     @Override
-    public NumericNode numberNode(int v) {
+    public IntNode numberNode(int v) {
         return new IntNode(v);
     }
 
     @Override
-    public NumericNode numberNode(Integer value) {
-        return null;
+    public IntNode numberNode(Integer value) {
+        return new IntNode(value);
     }
 
     @Override
     public NumericNode numberNode(long v) {
-        return null;
+        return new LongNode(v);
     }
 
     @Override
     public NumericNode numberNode(Long value) {
-        return null;
+        return new LongNode(value);
     }
 
     @Override
@@ -133,18 +135,27 @@ public class NodeFactory implements NodeCreator, Serializable {
     }
 
     @Override
-    public ArrayNode arrayNode() { return new ArrayNode(this); }
+    public ArrayNode arrayNode() {
+        return new ArrayNode(this);
+    }
 
     /**
      * Factory method for constructing a JSON Array node with an initial capacity
-     *
      */
     @Override
-    public ArrayNode arrayNode(int capacity) { return new ArrayNode(this, capacity); }
+    public ArrayNode arrayNode(int capacity) {
+        return new ArrayNode(this, capacity);
+    }
 
     /**
      * Factory method for constructing an empty JSON Object ("struct") node
      */
     @Override
-    public ObjectNode objectNode() { return new ObjectNode(this); }
+    public ObjectNode objectNode() {
+        return new ObjectNode(this);
+    }
+
+    public DateNode dateNode(Date date) {
+        return new DateNode(date);
+    }
 }

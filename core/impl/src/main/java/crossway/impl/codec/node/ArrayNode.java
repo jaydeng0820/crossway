@@ -6,6 +6,7 @@ import crossway.codec.node.NodeType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ArrayNode extends ContainerNode<ArrayNode> implements Serializable {
@@ -97,6 +98,11 @@ public class ArrayNode extends ContainerNode<ArrayNode> implements Serializable 
     @Override
     public boolean isArray() {
         return true;
+    }
+
+    @Override
+    public Iterator<Node> elements() {
+        return this.children.iterator();
     }
 
     /**

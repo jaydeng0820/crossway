@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -176,6 +177,10 @@ public abstract class Node implements Iterable<Node> {
         return false;
     }
 
+    public final boolean isDate() {
+        return getNodeType() == NodeType.DATE;
+    }
+
     /**
      * Method that can be used to check whether this node is a numeric node ({@link #isNumber} would return true) AND
      * its value fits within Java's 32-bit signed integer type, <code>int</code>. Note that floating-point numbers are
@@ -325,6 +330,10 @@ public abstract class Node implements Iterable<Node> {
      */
     public BigInteger bigIntegerValue() {
         return BigInteger.ZERO;
+    }
+
+    public Date dateValue() {
+        return null;
     }
 
     /**
@@ -520,6 +529,8 @@ public abstract class Node implements Iterable<Node> {
     }
 
     @Override
-    public final Iterator<Node> iterator() { return elements(); }
+    public final Iterator<Node> iterator() {
+        return elements();
+    }
 
 }

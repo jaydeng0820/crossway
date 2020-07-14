@@ -175,7 +175,7 @@ public class ReflectUtils {
     }
 
     public static String getPropertyNameFromBeanWriteMethod(Method method) {
-        if (isBeanPropertyReadMethod(method)) {
+        if (isBeanPropertyWriteMethod(method)) {
             if (method.getName().startsWith("set")) {
                 return method.getName().substring(3, 4).toLowerCase()
                         + method.getName().substring(4);
