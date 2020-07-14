@@ -26,7 +26,7 @@ public class CrossWaySend extends Send {
     }
 
     @Override
-    protected String getDefaultSeriallzerType() {
+    protected String getDefaultSerializeType() {
         return "string";
     }
 

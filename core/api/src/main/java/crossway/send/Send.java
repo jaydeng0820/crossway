@@ -29,10 +29,10 @@ public abstract class Send implements Invoker {
 
     protected String getSerializeType() {
         return StringUtils.isNotEmpty(getConfig().getSerializerType()) ? getConfig().getSerializerType() :
-               getDefaultSeriallzerType();
+               getDefaultSerializeType();
     }
 
-    protected abstract String getDefaultSeriallzerType();
+    protected abstract String getDefaultSerializeType();
 
     protected Serializer getSerializer(){
         return SerializerFactory.getSerializer(getSerializeType());

@@ -43,7 +43,7 @@ public class CrossWayListener extends Listener {
     }
 
     @Override
-    protected String getDefaultSeriallzerType() {
+    protected String getDefaultSerializeType() {
         return "string";
     }
 }

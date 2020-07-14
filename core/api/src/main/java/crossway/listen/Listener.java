@@ -39,13 +39,13 @@ public abstract class Listener implements Invoker {
 
     protected String getSerializeType() {
         return StringUtils.isNotEmpty(getConfig().getSerializerType()) ? getConfig().getSerializerType() :
-               getDefaultSeriallzerType();
+               getDefaultSerializeType();
     }
 
     protected Serializer getSerializer(){
         return SerializerFactory.getSerializer(getSerializeType());
     }
 
-    protected abstract String getDefaultSeriallzerType();
+    protected abstract String getDefaultSerializeType();
 
 }

@@ -4,6 +4,7 @@ import crossway.codec.Serializer;
 import crossway.config.ListenerConfig;
 import crossway.core.request.CrossWayRequest;
 import crossway.core.response.CrossWayResponse;
+import crossway.ext.api.Extension;
 import crossway.listen.Listener;
 import crossway.utils.StringUtils;
 import spark.Request;
@@ -12,6 +13,7 @@ import spark.Response;
 import static spark.Spark.get;
 import static spark.Spark.post;
 
+@Extension("http")
 public class HttpListener extends Listener {
     public HttpListener(ListenerConfig config) {
         super(config);
@@ -42,7 +44,7 @@ public class HttpListener extends Listener {
 
 
     @Override
-    protected String getDefaultSeriallzerType() {
+    protected String getDefaultSerializeType() {
         return "json";
     }
 }
