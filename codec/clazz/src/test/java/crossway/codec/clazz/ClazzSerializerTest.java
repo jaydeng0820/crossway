@@ -1,10 +1,11 @@
 package crossway.codec.clazz;
 
 import crossway.impl.codec.node.ObjectNode;
-import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,8 @@ class ClazzSerializerTest {
         List<TestObject> list = new ArrayList<>();
 
         TestObject testObject1 = new TestObject();
+        testObject1.setList(Arrays.asList(new TestObject()));
+        testObject1.setTestObject(new TestObject());
         list.add(testObject1);
 
         testObject.setList(list);
@@ -36,7 +39,7 @@ class ClazzSerializerTest {
         context.put("root", "crossway.codec.clazz.TestObject");
         TestObject testObject2 = (TestObject) clazzSerializer.decode(objectNode, context);
 
-        Assertions.assertEquals(testObject, testObject2);
+        Assertions.assertThat(testObject2).isEqualToComparingFieldByFieldRecursively(testObject);
     }
 
 }
