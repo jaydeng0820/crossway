@@ -1,5 +1,5 @@
 plugins {
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+//    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id "io.freefair.lombok" version "5.0.0-rc6"
 }
 
@@ -29,9 +29,8 @@ subprojects {
         generateLombokConfig.enabled = false
     }
 
-    apply from: rootProject.file('gradle/published-java-module.gradle')
-
     clean {
         delete 'target', 'logs'
     }
+
 }

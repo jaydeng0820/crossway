@@ -1,0 +1,6 @@
+dependencies {
+    compile(
+        project(':core:api'),
+        project(':core:common')
+    )
+}

@@ -19,7 +19,7 @@ package crossway.exception;
 /**
  * SOFA RPC Exception, all rpc exception will extends it
  *
- * @author <a href="mailto:zhanggeng.zg@antfin.com">GengZhang</a>
+ * @author
  */
 public class CrossWayException extends RuntimeException {
 
@@ -27,7 +27,7 @@ public class CrossWayException extends RuntimeException {
     /**
      * 异常类型
      */
-    protected int errorType = ErrorType.UNKNOWN;
+    protected            int  errorType        = ErrorType.UNKNOWN;
 
     protected CrossWayException() {
 
@@ -46,16 +46,6 @@ public class CrossWayException extends RuntimeException {
     public CrossWayException(int errorType, String message, Throwable cause) {
         super(message, cause);
         this.errorType = errorType;
-    }
-
-    @Deprecated
-    public CrossWayException(String message) {
-        super(message);
-    }
-
-    @Deprecated
-    public CrossWayException(String message, Throwable t) {
-        super(message, t);
     }
 
     public int getErrorType() {

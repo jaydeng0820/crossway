@@ -38,9 +38,9 @@ sourcesJar.baseName("crossway-" + project.name)
 // Testing
 tasks.withType(Test.class).all { task ->
     task.jvmArgs += [
-            '-XX:+HeapDumpOnOutOfMemoryError',
-            "-XX:HeapDumpPath=${file("${buildDir}/OOM-dump.hprof").absolutePath}",
-            '-XX:MetaspaceSize=256M'
+        '-XX:+HeapDumpOnOutOfMemoryError',
+        "-XX:HeapDumpPath=${file("${buildDir}/OOM-dump.hprof").absolutePath}",
+        '-XX:MetaspaceSize=256M'
     ]
     task.maxHeapSize = '2G'
 }
@@ -59,10 +59,10 @@ jar {
 
 dependencies {
     api(
-            libraries.'slf4j',
-            libraries.'jackson-core',
-            libraries.'jackson-databind',
-            libraries.'jackson-annotations',
-            libraries.'jackson-dataformat-xml'
+        libraries.'slf4j',
+        libraries.'jackson-core',
+        libraries.'jackson-databind',
+        libraries.'jackson-annotations',
+        libraries.'jackson-dataformat-xml'
     )
 }

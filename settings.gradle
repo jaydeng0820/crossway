@@ -1,14 +1,25 @@
 rootProject.name = 'crossway'
 
+include(
+    ":core:api",
+    ":core:impl",
+    ":core:common",
+
+    ":codec:json",
+    ":codec:clazz",
+
+    ":protocol:http"
+
+)
+
 //include ':boot:gateway'
 //include ':boot:starters:gateway'
 //include ':boot:starters:sofarpc-plugin'
 //include ':boot:starters:tibcorv-plugin'
 
-include 'core'
-include 'commons'
-include 'exception'
-include 'spring'
+//include 'core'
+//include 'commons'
+include ':exception'
 
 //include ':test:app'
 //include ':test:send'
@@ -17,8 +28,8 @@ include 'spring'
 //
 //include ':plugin:http'
 //include ':plugin:tibcorv'
-include ':plugin:sofa:sofarpc'
-include ':plugin:sofa:sofarpc-api'
+//include ':plugin:sofa:sofarpc'
+//include ':plugin:sofa:sofarpc-api'
 
 //project(':boot:starters').children.each { project ->
 //    changProjectName(project, project.name + "-spring-boot-starter")
