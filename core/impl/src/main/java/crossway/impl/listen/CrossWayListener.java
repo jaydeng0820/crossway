@@ -1,12 +1,11 @@
 package crossway.impl.listen;
 
 import crossway.codec.Serializer;
-import crossway.codec.SerializerFactory;
 import crossway.config.ListenerConfig;
 import crossway.core.request.CrossWayRequest;
-import crossway.core.response.CrossWayResponse;
 import crossway.ext.api.Extension;
 import crossway.listen.Listener;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -17,29 +16,44 @@ import java.util.concurrent.CompletableFuture;
  * @date: 2020/7/3 16:49
  * @copyright: 2020, FA Software (Shanghai) Co., Ltd. All Rights Reserved.
  */
+@Slf4j
 @Extension("default-listener")
 public class CrossWayListener extends Listener {
     public CrossWayListener(ListenerConfig config) {
         super(config);
     }
 
-    public Object request(Object request) throws Exception {
+    public Object request(Object request) {
         Serializer serializer = getSerializer();
 
         CrossWayRequest crossWayRequest = new CrossWayRequest();
         crossWayRequest.setData(serializer.encode(request, null));
 
-        CrossWayResponse response = getConfig().getTransport().getSend().invoke(crossWayRequest);
+        return getConfig().getTransport().apply(CompletableFuture.supplyAsync(() -> crossWayRequest)).thenApplyAsync(
+            response -> {
+                if (response.isError()) {
+                    throw (RuntimeException) response.getError();
+                }
 
-        if (response.isError()) {
-            throw response.getError();
-        }
-        return serializer.decode(response.getData(), null);
+                return serializer.decode(response.getData(), null);
+
+            }).join();
     }
 
-    public CompletableFuture<CrossWayResponse> requestAsync(Object request) throws Exception {
-        CrossWayRequest crossWayRequest = new CrossWayRequest();
-        return CompletableFuture.supplyAsync(() -> getConfig().getTransport().getSend().invoke(crossWayRequest));
+    public CompletableFuture<Object> async(Object request) {
+        return getConfig().getTransport().apply(CompletableFuture.supplyAsync(() -> {
+            Serializer serializer = getSerializer();
+
+            CrossWayRequest crossWayRequest = new CrossWayRequest();
+            crossWayRequest.setData(serializer.encode(request, null));
+            return crossWayRequest;
+        })).thenApplyAsync(response -> {
+            if (response.isError()) {
+                throw (RuntimeException) response.getError();
+            }
+
+            return getSerializer().decode(response.getData(), null);
+        });
     }
 
     @Override

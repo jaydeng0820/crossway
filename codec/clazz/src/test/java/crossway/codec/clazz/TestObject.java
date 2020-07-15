@@ -11,7 +11,7 @@ public class TestObject {
     private long   aLong = 111L;
     private int    anInt = 111;
 
-    private TestObject testObject;
+    private TestObject              testObject;
     private List<TestObject>        list;
     private Map<String, TestObject> objectMap;
 

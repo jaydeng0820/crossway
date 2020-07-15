@@ -12,7 +12,8 @@ public class ExtensionLoaderFactory {
     /**
      * All extension loader {Class : ExtensionLoader}
      */
-    private static final ConcurrentMap<Class, ExtensionLoader> LOADER_MAP = new ConcurrentHashMap<Class, ExtensionLoader>();
+    private static final ConcurrentMap<Class, ExtensionLoader> LOADER_MAP = new ConcurrentHashMap<Class,
+        ExtensionLoader>();
 
     private ExtensionLoaderFactory() {
     }
@@ -20,9 +21,13 @@ public class ExtensionLoaderFactory {
     /**
      * Get extension loader by extensible class with listener
      *
-     * @param clazz    Extensible class
-     * @param listener Listener of ExtensionLoader
-     * @param <T>      Class
+     * @param clazz
+     *     Extensible class
+     * @param listener
+     *     Listener of ExtensionLoader
+     * @param <T>
+     *     Class
+     *
      * @return ExtensionLoader of this class
      */
     public static <T> ExtensionLoader<T> getExtensionLoader(Class<T> clazz, ExtensionLoaderListener<T> listener) {
@@ -42,8 +47,11 @@ public class ExtensionLoaderFactory {
     /**
      * Get extension loader by extensible class without listener
      *
-     * @param clazz Extensible class
-     * @param <T>   Class
+     * @param clazz
+     *     Extensible class
+     * @param <T>
+     *     Class
+     *
      * @return ExtensionLoader of this class
      */
     public static <T> ExtensionLoader<T> getExtensionLoader(Class<T> clazz) {

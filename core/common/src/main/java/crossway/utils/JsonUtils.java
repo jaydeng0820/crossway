@@ -1,7 +1,11 @@
 package crossway.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.type.MapType;
 
 import java.io.IOException;
@@ -36,8 +40,7 @@ public class JsonUtils {
         return findValue(jsonStr, fieldName, valueType, defaultObjectMapper);
     }
 
-    public static <T> T findValue(String jsonStr, String fieldName, Class<T> valueType,
-                                  ObjectMapper om) {
+    public static <T> T findValue(String jsonStr, String fieldName, Class<T> valueType, ObjectMapper om) {
         try {
             JsonNode fieldNode = om.readTree(jsonStr).findValue(fieldName);
             return om.convertValue(fieldNode, valueType);
@@ -54,8 +57,11 @@ public class JsonUtils {
      * 建议使用这个方法来方便地取得目标值，而不是转化为临时的Map对象后通过map.get("key")取得。
      * </pre>
      *
-     * @param json     目标JSON字符串
-     * @param nodeKeys 抵达目标节点所有的节点key或数组下标
+     * @param json
+     *     目标JSON字符串
+     * @param nodeKeys
+     *     抵达目标节点所有的节点key或数组下标
+     *
      * @return 目标值
      */
     public static String getValue(String json, String... nodeKeys) {
@@ -70,8 +76,11 @@ public class JsonUtils {
      * 建议使用这个方法来方便地取得目标值，而不是转化为临时的Map对象后通过map.get("key")取得。
      * </pre>
      *
-     * @param json     目标JSON字符串
-     * @param nodeKeys 抵达目标节点所有的节点key或数组下标
+     * @param json
+     *     目标JSON字符串
+     * @param nodeKeys
+     *     抵达目标节点所有的节点key或数组下标
+     *
      * @return 目标值
      */
     public static String getValue(String json, ObjectMapper om, String... nodeKeys) {
@@ -112,8 +121,7 @@ public class JsonUtils {
         return getValue2Bean(json, defaultObjectMapper, valueType, nodeKeys);
     }
 
-    public static <T> T getValue2Bean(String json, ObjectMapper om, Class<T> valueType,
-                                      String... nodeKeys) {
+    public static <T> T getValue2Bean(String json, ObjectMapper om, Class<T> valueType, String... nodeKeys) {
         try {
             JsonNode node = om.readTree(json);
             for (String nodeKey : nodeKeys) {
@@ -128,8 +136,7 @@ public class JsonUtils {
         }
     }
 
-    public static <T> T getValue2Bean(InputStream inputStream, Class<T> valueType,
-                                      String... nodeKeys) {
+    public static <T> T getValue2Bean(InputStream inputStream, Class<T> valueType, String... nodeKeys) {
         return getValue2Bean(inputStream, defaultObjectMapper, valueType, nodeKeys);
     }
 
@@ -170,8 +177,7 @@ public class JsonUtils {
         return toMap(jsonInString, String.class, Object.class, om);
     }
 
-    public static <K, V> Map<K, V> toMap(String jsonInString, Class<K> keyClass,
-                                         Class<V> valueClass) {
+    public static <K, V> Map<K, V> toMap(String jsonInString, Class<K> keyClass, Class<V> valueClass) {
         return toMap(jsonInString, keyClass, valueClass, defaultObjectMapper);
     }
 
@@ -179,11 +185,9 @@ public class JsonUtils {
         return toMap(jsonInString, String.class, valueType);
     }
 
-    public static <K, V> Map<K, V> toMap(String jsonInString, Class<K> keyClass,
-                                         Class<V> valueClass, ObjectMapper om) {
+    public static <K, V> Map<K, V> toMap(String jsonInString, Class<K> keyClass, Class<V> valueClass, ObjectMapper om) {
         try {
-            MapType javaType = om.getTypeFactory().constructMapType(HashMap.class, keyClass,
-                    valueClass);
+            MapType javaType = om.getTypeFactory().constructMapType(HashMap.class, keyClass, valueClass);
             return om.readValue(jsonInString, javaType);
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage(), e);
@@ -198,16 +202,14 @@ public class JsonUtils {
         return toMap(inputStream, String.class, Object.class, om);
     }
 
-    public static <V> Map<String, V> toMap(InputStream inputStream, Class<V> valueClass,
-                                           ObjectMapper om) {
+    public static <V> Map<String, V> toMap(InputStream inputStream, Class<V> valueClass, ObjectMapper om) {
         return toMap(inputStream, String.class, valueClass, om);
     }
 
-    public static <K, V> Map<K, V> toMap(InputStream jsonInString, Class<K> keyClass,
-                                         Class<V> valueClass, ObjectMapper om) {
+    public static <K, V> Map<K, V> toMap(InputStream jsonInString, Class<K> keyClass, Class<V> valueClass,
+                                         ObjectMapper om) {
         try {
-            MapType javaType = om.getTypeFactory().constructMapType(HashMap.class, keyClass,
-                    valueClass);
+            MapType javaType = om.getTypeFactory().constructMapType(HashMap.class, keyClass, valueClass);
             return om.readValue(jsonInString, javaType);
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage(), e);
@@ -257,7 +259,9 @@ public class JsonUtils {
     /**
      * 对象转换行格式化的Json
      *
-     * @param jsonOutObj 源对象
+     * @param jsonOutObj
+     *     源对象
+     *
      * @return
      */
     public static String toStringWithWrap(Object jsonOutObj) {

@@ -35,7 +35,7 @@ public class CrossWayRequest extends RequestBase {
     /**
      * Extensional properties of request
      */
-    private           Map<String, Object> requestProps;
+    private           Map<String, Object> requestProps = new HashMap<>();
     /**
      * 序列化类型
      */

@@ -18,17 +18,17 @@ public class LogCodes {
 
     // 01 启动
     // 01003 ext
-    public static final String ERROR_LOAD_EXT = "010030001";
-    public static final String ERROR_FILTER_CONSTRUCT = "010030002";
+    public static final String ERROR_LOAD_EXT              = "010030001";
+    public static final String ERROR_FILTER_CONSTRUCT      = "010030002";
     //01999 common通用
     public static final String ERROR_LOAD_CROSSWAY_CONFIGS = "019990001";
-    public static final String ERROR_NOT_FOUND_KEY = "019990022";
+    public static final String ERROR_NOT_FOUND_KEY         = "019990022";
 
     // 02 运行
     // 02999 common通用的
     // 02012 crossway.impl.filter
     public static final String ERROR_NEXT_FILTER_AND_INVOKER_NULL = "020120002";
-    public static final String ERROR_NEED_DECODE_METHOD = "020120003";
+    public static final String ERROR_NEED_DECODE_METHOD           = "020120003";
 
     // 02013 bootstrap
     public static final String ERROR_LOAD_HOOK_NULL = "020130001";
@@ -37,9 +37,9 @@ public class LogCodes {
     public static final String ERROR_SERIALIZER_TYPE = "02014001";
 
     // 未知错误
-    public static final String LOCALFILEREGISTRY_FAIL_WRITEFILE = "029990001";
-    protected static final Map<String, String> LOG_CODES = new ConcurrentHashMap<>();
-    protected final static String LOG = "crossway-%s: %s";
+    public static final    String              LOCALFILEREGISTRY_FAIL_WRITEFILE = "029990001";
+    protected static final Map<String, String> LOG_CODES                        = new ConcurrentHashMap<>();
+    protected final static String              LOG                              = "crossway-%s: %s";
 
     static {
         init("logcodes-common");
@@ -48,7 +48,8 @@ public class LogCodes {
     /**
      * 初始化 Log Codes
      *
-     * @param filename 用户名
+     * @param filename
+     *     用户名
      */
     public static void init(String filename) {
         ClassLoader oldClassLoader = Thread.currentThread().getContextClassLoader();
@@ -104,10 +105,11 @@ public class LogCodes {
     }
 
     /**
-     * 当输入为日志码的时候，输出日志码对应的日志内容
-     * 否则直接输出日志内容
+     * 当输入为日志码的时候，输出日志码对应的日志内容 否则直接输出日志内容
      *
-     * @param codeOrMsg 日志码或日志输出
+     * @param codeOrMsg
+     *     日志码或日志输出
+     *
      * @return 基本日志输出，不包含日志码
      */
     public static String getLiteLog(String codeOrMsg, Object... messages) {

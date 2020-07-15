@@ -16,13 +16,15 @@ public final class SendFactory {
             ExtensionClass<Send> ext = ExtensionLoaderFactory.getExtensionLoader(Send.class).getExtensionClass(
                 senderConfig.getProtocol());
             if (ext == null) {
-                throw new CrossWayRuntimeException(LogCodes.getLog(LogCodes.ERROR_LOAD_EXT, "Send", senderConfig.getProtocol()));
+                throw new CrossWayRuntimeException(
+                    LogCodes.getLog(LogCodes.ERROR_LOAD_EXT, "Send", senderConfig.getProtocol()));
             }
             return ext.getExtInstance(new Class[]{SenderConfig.class}, new Object[]{senderConfig});
         } catch (CrossWayRuntimeException e) {
             throw e;
         } catch (Throwable e) {
-            throw new CrossWayRuntimeException(LogCodes.getLog(LogCodes.ERROR_LOAD_EXT, "Send", senderConfig.getProtocol()));
+            throw new CrossWayRuntimeException(
+                LogCodes.getLog(LogCodes.ERROR_LOAD_EXT, "Send", senderConfig.getProtocol()));
         }
     }
 }

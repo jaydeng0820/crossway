@@ -10,13 +10,9 @@ import crossway.ext.api.Extensible;
  * @author iamcyw
  **/
 @Extensible(singleton = true)
-public abstract class Filter {
+public interface Filter {
 
-    public abstract CrossWayResponse invoke(FilterInvoker invoker, CrossWayRequest request);
+    public abstract CrossWayRequest request(CrossWayRequest request);
 
-    public boolean needToLoad(FilterInvoker invoker) {
-        return true;
-    }
-
-
+    public abstract CrossWayResponse response(CrossWayResponse response);
 }

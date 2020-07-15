@@ -34,12 +34,12 @@ public class MethodConfig implements Serializable {
     /**
      * The Timeout. 远程调用超时时间(毫秒)
      */
-    protected Integer timeout;
+    protected Integer             timeout;
     /**
      * The Retries. 失败后重试次数
      */
-    protected Integer retries;
-    private String name;
+    protected Integer             retries;
+    private   String              name;
 
     /**
      * Gets parameters.

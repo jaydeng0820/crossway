@@ -75,8 +75,8 @@ public class WayConstants {
     /**
      * 默认字符集 utf-8
      */
-    public static final Charset DEFAULT_CHARSET = Charset
-        .forName(CrossWayConfigs.getStringValue(CrossWayOptions.DEFAULT_CHARSET));
+    public static final Charset DEFAULT_CHARSET = Charset.forName(
+        CrossWayConfigs.getStringValue(CrossWayOptions.DEFAULT_CHARSET));
 
     /**
      * 调用方式：同步调用
@@ -86,7 +86,7 @@ public class WayConstants {
     /**
      * 调用方式：单向
      */
-    public static final String INVOKER_TYPE_ONEWAY = "oneway";
+    public static final String INVOKER_TYPE_ONEWAY   = "oneway";
     /**
      * 调用方式：回调
      */
@@ -94,14 +94,14 @@ public class WayConstants {
     /**
      * 调用方式：future
      */
-    public static final String INVOKER_TYPE_FUTURE = "future";
+    public static final String INVOKER_TYPE_FUTURE   = "future";
 
     /**
      * Hessian序列化 [不推荐]
      *
      * @deprecated Use {@link #SERIALIZE_HESSIAN2}
      */
-    public static final String SERIALIZE_HESSIAN = "hessian";
+    public static final String SERIALIZE_HESSIAN  = "hessian";
     /**
      * Hessian2序列化
      */
@@ -109,7 +109,7 @@ public class WayConstants {
     /**
      * Java序列化
      */
-    public static final String SERIALIZE_JAVA = "java";
+    public static final String SERIALIZE_JAVA     = "java";
     /**
      * protobuf序列化
      */
@@ -117,20 +117,20 @@ public class WayConstants {
     /**
      * json序列化
      */
-    public static final String SERIALIZE_JSON = "json";
+    public static final String SERIALIZE_JSON     = "json";
 
     /**
      * 协议类型：(tr+bolt) v==4.0?bolt:tr
      *
      * @since 5.1.0
      */
-    public static final String PROTOCOL_TYPE_TR = "tr";
+    public static final String PROTOCOL_TYPE_TR     = "tr";
     /**
      * 协议类型：bolt
      *
      * @since 5.1.0
      */
-    public static final String PROTOCOL_TYPE_BOLT = "bolt";
+    public static final String PROTOCOL_TYPE_BOLT   = "bolt";
     /**
      * 协议类型：triple
      *
@@ -142,37 +142,37 @@ public class WayConstants {
      *
      * @since 5.1.0
      */
-    public static final String PROTOCOL_TYPE_XFIRE = "xfire";
+    public static final String PROTOCOL_TYPE_XFIRE  = "xfire";
     /**
      * 协议类型：rest
      *
      * @since 5.2.0
      */
-    public static final String PROTOCOL_TYPE_REST = "rest";
+    public static final String PROTOCOL_TYPE_REST   = "rest";
     /**
      * 协议类型：http (http/1.1)
      *
      * @since 5.4.0
      */
-    public static final String PROTOCOL_TYPE_HTTP = "http";
+    public static final String PROTOCOL_TYPE_HTTP   = "http";
     /**
      * 协议类型：https
      *
      * @since 5.4.0
      */
-    public static final String PROTOCOL_TYPE_HTTPS = "https";
+    public static final String PROTOCOL_TYPE_HTTPS  = "https";
     /**
      * 协议类型：http2 clear text
      *
      * @since 5.4.0
      */
-    public static final String PROTOCOL_TYPE_H2C = "h2c";
+    public static final String PROTOCOL_TYPE_H2C    = "h2c";
     /**
      * 协议类型：http2
      *
      * @since 5.4.0
      */
-    public static final String PROTOCOL_TYPE_H2 = "h2";
+    public static final String PROTOCOL_TYPE_H2     = "h2";
 
     /**
      * rest allow origins key
@@ -201,7 +201,7 @@ public class WayConstants {
     /**
      * 隐藏的key前缀，防止和自定义key冲突，隐藏的key不会被关闭上下文传递功能
      */
-    public static final char HIDE_KEY_PREFIX = '.';
+    public static final char HIDE_KEY_PREFIX     = '.';
     /**
      * 内部使用的key前缀，防止和自定义key冲突，这种key可能被关闭上下文传递功能。
      */
@@ -210,19 +210,19 @@ public class WayConstants {
     /**
      * 隐藏的key：.async_context 异步调用上下文
      */
-    public static final String HIDDEN_KEY_ASYNC_CONTEXT = HIDE_KEY_PREFIX + "async_context";
+    public static final String HIDDEN_KEY_ASYNC_CONTEXT  = HIDE_KEY_PREFIX + "async_context";
     /**
      * 隐藏的key：.async_req 异步调用请求
      */
-    public static final String HIDDEN_KEY_ASYNC_REQUEST = HIDE_KEY_PREFIX + "async_req";
+    public static final String HIDDEN_KEY_ASYNC_REQUEST  = HIDE_KEY_PREFIX + "async_req";
     /**
      * 隐藏的key：.pinpoint 指定远程调用地址
      */
-    public static final String HIDDEN_KEY_PINPOINT = HIDE_KEY_PREFIX + "pinpoint";
+    public static final String HIDDEN_KEY_PINPOINT       = HIDE_KEY_PREFIX + "pinpoint";
     /**
      * 隐藏的key：.token 指定调用Token
      */
-    public static final String HIDDEN_KEY_TOKEN = HIDE_KEY_PREFIX + "token";
+    public static final String HIDDEN_KEY_TOKEN          = HIDE_KEY_PREFIX + "token";
     /**
      * 隐藏的key：.invoke_ctx 业务调用上下文
      */
@@ -230,36 +230,36 @@ public class WayConstants {
     /**
      * 隐藏属性的key：consumer是否自动销毁（例如Registry和Monitor不需要自动销毁）
      */
-    public static final String HIDDEN_KEY_DESTROY = HIDE_KEY_PREFIX + "destroy";
+    public static final String HIDDEN_KEY_DESTROY        = HIDE_KEY_PREFIX + "destroy";
 
     /**
      * 内部使用的key：_app_name，string
      */
-    public static final String INTERNAL_KEY_APP_NAME = INTERNAL_KEY_PREFIX + "app_name";
+    public static final String INTERNAL_KEY_APP_NAME              = INTERNAL_KEY_PREFIX + "app_name";
     /**
      * 内部使用的key：_protocol_name，string
      */
-    public static final String INTERNAL_KEY_PROTOCOL_NAME = INTERNAL_KEY_PREFIX + "protocol_name";
+    public static final String INTERNAL_KEY_PROTOCOL_NAME         = INTERNAL_KEY_PREFIX + "protocol_name";
     /**
      * 内部使用的key：_req_size， int
      */
-    public static final String INTERNAL_KEY_REQ_SIZE = INTERNAL_KEY_PREFIX + "req_size";
+    public static final String INTERNAL_KEY_REQ_SIZE              = INTERNAL_KEY_PREFIX + "req_size";
     /**
      * 内部使用的key：_req_serialize_time， int
      */
-    public static final String INTERNAL_KEY_REQ_SERIALIZE_TIME = INTERNAL_KEY_PREFIX + "req_ser_time";
+    public static final String INTERNAL_KEY_REQ_SERIALIZE_TIME    = INTERNAL_KEY_PREFIX + "req_ser_time";
     /**
      * 内部使用的key：_req_deserialize_time， int
      */
-    public static final String INTERNAL_KEY_REQ_DESERIALIZE_TIME = INTERNAL_KEY_PREFIX + "req_des_time";
+    public static final String INTERNAL_KEY_REQ_DESERIALIZE_TIME  = INTERNAL_KEY_PREFIX + "req_des_time";
     /**
      * 内部使用的key：_resp_size， int
      */
-    public static final String INTERNAL_KEY_RESP_SIZE = INTERNAL_KEY_PREFIX + "resp_size";
+    public static final String INTERNAL_KEY_RESP_SIZE             = INTERNAL_KEY_PREFIX + "resp_size";
     /**
      * 内部使用的key：_resp_serialized_time， int
      */
-    public static final String INTERNAL_KEY_RESP_SERIALIZE_TIME = INTERNAL_KEY_PREFIX + "resp_ser_time";
+    public static final String INTERNAL_KEY_RESP_SERIALIZE_TIME   = INTERNAL_KEY_PREFIX + "resp_ser_time";
     /**
      * 内部使用的key：_resp_deserialize_time， int
      */
@@ -267,25 +267,25 @@ public class WayConstants {
     /**
      * 内部使用的key：_process_wait_time 在业务线程池里等待时间，long
      */
-    public static final String INTERNAL_KEY_PROCESS_WAIT_TIME = INTERNAL_KEY_PREFIX + "process_wait_time";
+    public static final String INTERNAL_KEY_PROCESS_WAIT_TIME     = INTERNAL_KEY_PREFIX + "process_wait_time";
     /**
      * 内部使用的key：_conn_create_time 长连接建立时间，long
      */
-    public static final String INTERNAL_KEY_CONN_CREATE_TIME = INTERNAL_KEY_PREFIX + "conn_create_time";
+    public static final String INTERNAL_KEY_CONN_CREATE_TIME      = INTERNAL_KEY_PREFIX + "conn_create_time";
     /**
      * 内部使用的key：_impl_elapse 业务代码执行耗时，long
      */
-    public static final String INTERNAL_KEY_IMPL_ELAPSE = INTERNAL_KEY_PREFIX + "impl_elapse";
+    public static final String INTERNAL_KEY_IMPL_ELAPSE           = INTERNAL_KEY_PREFIX + "impl_elapse";
     /**
      * 内部使用的key：_client_elapse 客户端总耗时，long
      */
-    public static final String INTERNAL_KEY_CLIENT_ELAPSE = INTERNAL_KEY_PREFIX + "client_elapse";
+    public static final String INTERNAL_KEY_CLIENT_ELAPSE         = INTERNAL_KEY_PREFIX + "client_elapse";
     /**
      * 内部使用的key：_client_send_time 客户端发送时间戳，long
      *
      * @since 5.4.0
      */
-    public static final String INTERNAL_KEY_CLIENT_SEND_TIME = INTERNAL_KEY_PREFIX + "client_send_time";
+    public static final String INTERNAL_KEY_CLIENT_SEND_TIME      = INTERNAL_KEY_PREFIX + "client_send_time";
 
     /**
      * 内部使用的key：_server_receive_time 服务端接收时间戳，long
@@ -301,25 +301,25 @@ public class WayConstants {
     /**
      * 内部使用的key：_invoke_times 调用次数，int
      */
-    public static final String INTERNAL_KEY_INVOKE_TIMES = INTERNAL_KEY_PREFIX + "invoke_times";
+    public static final String INTERNAL_KEY_INVOKE_TIMES  = INTERNAL_KEY_PREFIX + "invoke_times";
     /**
      * 内部使用的key：_result_code，结果码
      *
      * @since 5.1.1
      */
-    public static final String INTERNAL_KEY_RESULT_CODE = INTERNAL_KEY_PREFIX + "result_code";
+    public static final String INTERNAL_KEY_RESULT_CODE   = INTERNAL_KEY_PREFIX + "result_code";
     /**
      * 内部使用的key： _trace_id
      *
      * @since 5.1.1
      */
-    public static final String INTERNAL_KEY_TRACE_ID = INTERNAL_KEY_PREFIX + "trace_id";
+    public static final String INTERNAL_KEY_TRACE_ID      = INTERNAL_KEY_PREFIX + "trace_id";
     /**
      * 内部使用的key： _span_id
      *
      * @since 5.1.1
      */
-    public static final String INTERNAL_KEY_SPAN_ID = INTERNAL_KEY_PREFIX + "span_id";
+    public static final String INTERNAL_KEY_SPAN_ID       = INTERNAL_KEY_PREFIX + "span_id";
 
     /**
      * 内部使用的key：_tracer_span
@@ -332,7 +332,7 @@ public class WayConstants {
     /**
      * 配置key:generic
      */
-    public static final String CONFIG_KEY_GENERIC = "generic";
+    public static final String CONFIG_KEY_GENERIC     = "generic";
     /**
      * 配置key:invokeType
      */
@@ -340,7 +340,7 @@ public class WayConstants {
     /**
      * 配置key:retries
      */
-    public static final String CONFIG_KEY_RETRIES = "retries";
+    public static final String CONFIG_KEY_RETRIES     = "retries";
 
     /**
      * 配置key:timeout

@@ -47,8 +47,10 @@ public class ListDifference<T> {
     /**
      * Difference list difference.
      *
-     * @param left  the left
-     * @param right the right
+     * @param left
+     *     the left
+     * @param right
+     *     the right
      */
     public ListDifference(List<? extends T> left, List<? extends T> right) {
         if (CommonUtils.isEmpty(left) || CommonUtils.isEmpty(right)) {

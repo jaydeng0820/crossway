@@ -8,11 +8,12 @@ import java.lang.annotation.Target;
 
 /**
  * 在目标FilterInvoker排除
+ *
  * @author iamcyw
  **/
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE })
+@Target({ElementType.TYPE})
 public @interface Exclude {
 
     String[] name();

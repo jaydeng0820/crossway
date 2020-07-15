@@ -36,7 +36,7 @@ public class TwoWayMap<K, V> implements Map<K, V> {
 
     private ConcurrentMap<V, K> vkMap = new ConcurrentHashMap<V, K>();
 
-    private ReentrantLock       lock  = new ReentrantLock();
+    private ReentrantLock lock = new ReentrantLock();
 
     @Override
     public int size() {

@@ -3,7 +3,6 @@ package crossway.http.listen;
 import crossway.codec.Serializer;
 import crossway.config.ListenerConfig;
 import crossway.core.request.CrossWayRequest;
-import crossway.core.response.CrossWayResponse;
 import crossway.ext.api.Extension;
 import crossway.listen.Listener;
 import crossway.utils.StringUtils;
@@ -30,16 +29,18 @@ public class HttpListener extends Listener {
     }
 
     private Object handle(Request request, Response response) {
-        Serializer serializer = getSerializer();
+        return getConfig().getTransport().apply(() -> {
+            Serializer serializer = getSerializer();
 
-        CrossWayRequest crossWayRequest = new CrossWayRequest();
-        crossWayRequest.setData(serializer.encode(request.body(), null));
-
-        CrossWayResponse crossWayResponse = invoke(crossWayRequest);
-        if (crossWayResponse.isError()) {
-            return crossWayResponse.getError();
-        }
-        return serializer.decode(crossWayResponse.getData(), null);
+            CrossWayRequest crossWayRequest = new CrossWayRequest();
+            crossWayRequest.setData(serializer.encode(request.body(), null));
+            return crossWayRequest;
+        }).thenApplyAsync(crossWayResponse -> {
+            if (crossWayResponse.isError()) {
+                return crossWayResponse.getError();
+            }
+            return getSerializer().decode(crossWayResponse.getData(), null);
+        }).join();
     }
 
 

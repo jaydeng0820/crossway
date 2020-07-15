@@ -1,12 +1,12 @@
 package crossway;
 
-import crossway.config.ListenerConfig;
-import crossway.config.SenderConfig;
-import crossway.filter.FilterInvoker;
-import crossway.send.Send;
-import crossway.utils.StringUtils;
+import crossway.core.request.CrossWayRequest;
+import crossway.transport.Transport;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author iamcyw
@@ -15,22 +15,16 @@ import org.junit.jupiter.api.Test;
 public class CrossWayTest {
 
     @Test
-    public void testCrossWay() {
+    public void testCrossWay() throws ExecutionException, InterruptedException {
+        log.info("start");
+        CrossWayRequest request = new CrossWayRequest();
 
-        int i = 0;
+        Transport transport = new Transport(null, null);
 
-        System.out.println(i++);
-
-        System.out.println(++i);
-
-        i--;
-        System.out.println(i);
+        transport.apply(CompletableFuture.supplyAsync(() -> request));
 
 
-//        SenderConfig senderConfig = new SenderConfig();
-//        Send invoker =  senderConfig.refer();
-//
-//        ListenerConfig listenerConfig = new ListenerConfig();
-//        listenerConfig.registry();
+        log.info("end");
+        Thread.sleep(1000);
     }
 }

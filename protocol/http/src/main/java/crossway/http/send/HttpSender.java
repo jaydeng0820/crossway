@@ -21,7 +21,11 @@ public class HttpSender extends Send {
     @Override
     public CrossWayResponse invoke(CrossWayRequest request) throws CrossWayException {
         String message = (String) getSerializer().decode(request.getData(), null);
-        getConfig().getParameter("");
+
+
         return null;
+
     }
+
+
 }

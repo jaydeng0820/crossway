@@ -40,7 +40,9 @@ public class ClassTypeUtils {
     /**
      * 通用描述转JVM描述
      *
-     * @param canonicalName 例如 int[]
+     * @param canonicalName
+     *     例如 int[]
+     *
      * @return JVM描述 例如 [I;
      */
     public static String canonicalNameToJvmName(String canonicalName) {
@@ -79,8 +81,7 @@ public class ClassTypeUtils {
         Class<?> entitiClass = null;
         Type genericSuperclass = clazz.getGenericSuperclass();
         if (genericSuperclass instanceof ParameterizedType) {
-            Type[] actualTypeArguments = ((ParameterizedType) genericSuperclass)
-                    .getActualTypeArguments();
+            Type[] actualTypeArguments = ((ParameterizedType) genericSuperclass).getActualTypeArguments();
             if (actualTypeArguments != null && actualTypeArguments.length > 0) {
                 entitiClass = (Class<?>) actualTypeArguments[index];
             }
@@ -92,7 +93,9 @@ public class ClassTypeUtils {
     /**
      * String转Class
      *
-     * @param typeStr 对象描述
+     * @param typeStr
+     *     对象描述
+     *
      * @return Class[]
      */
     public static Class getClass(String typeStr) {
@@ -126,7 +129,9 @@ public class ClassTypeUtils {
     /**
      * Class[]转String[]
      *
-     * @param typeStrs 对象描述[]
+     * @param typeStrs
+     *     对象描述[]
+     *
      * @return Class[]
      */
     public static Class[] getClasses(String[] typeStrs) throws RuntimeException {
@@ -144,7 +149,9 @@ public class ClassTypeUtils {
     /**
      * Class转String<br> 注意，得到的String可能不能直接用于Class.forName，请使用getClass(String)反向获取
      *
-     * @param clazz Class
+     * @param clazz
+     *     Class
+     *
      * @return 对象
      * @see #getClass(String)
      */
@@ -162,7 +169,9 @@ public class ClassTypeUtils {
     /**
      * Class[]转String[] <br> 注意，得到的String可能不能直接用于Class.forName，请使用getClasses(String[])反向获取
      *
-     * @param types Class[]
+     * @param types
+     *     Class[]
+     *
      * @return 对象描述
      * @see #getClasses(String[])
      */
@@ -173,8 +182,11 @@ public class ClassTypeUtils {
     /**
      * Class[]转String[] <br> 注意，得到的String可能不能直接用于Class.forName，请使用getClasses(String[])反向获取
      *
-     * @param types     Class[]
-     * @param javaStyle JDK自带格式，例如 int[], true的话返回 [I; false的话返回int[]
+     * @param types
+     *     Class[]
+     * @param javaStyle
+     *     JDK自带格式，例如 int[], true的话返回 [I; false的话返回int[]
+     *
      * @return 对象描述
      * @see #getClasses(String[])
      */
@@ -197,7 +209,9 @@ public class ClassTypeUtils {
     /**
      * JVM描述转通用描述
      *
-     * @param jvmName 例如 [I;
+     * @param jvmName
+     *     例如 [I;
+     *
      * @return 通用描述 例如 int[]
      */
     public static String jvmNameToCanonicalName(String jvmName) {

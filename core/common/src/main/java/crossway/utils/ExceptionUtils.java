@@ -31,7 +31,9 @@ public final class ExceptionUtils {
     /**
      * 返回堆栈信息（e.printStackTrace()的内容）
      *
-     * @param e Throwable
+     * @param e
+     *     Throwable
+     *
      * @return 异常堆栈信息
      */
     public static String toString(Throwable e) {
@@ -49,8 +51,11 @@ public final class ExceptionUtils {
     /**
      * 返回消息+简短堆栈信息（e.printStackTrace()的内容）
      *
-     * @param e          Throwable
-     * @param stackLevel 堆栈层级
+     * @param e
+     *     Throwable
+     * @param stackLevel
+     *     堆栈层级
+     *
      * @return 异常堆栈信息
      */
     public static String toShortString(Throwable e, int stackLevel) {

@@ -36,8 +36,10 @@ public class ValueDifference<V> {
     /**
      * Instantiates a new Value difference.
      *
-     * @param leftValue  the left value
-     * @param rightValue the right value
+     * @param leftValue
+     *     the left value
+     * @param rightValue
+     *     the right value
      */
     protected ValueDifference(V leftValue, V rightValue) {
         this.leftValue = leftValue;

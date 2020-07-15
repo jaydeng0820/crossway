@@ -3,5 +3,4 @@ package crossway.bootstrap;
 /**
  * @author iamcyw
  **/
-public class TestBootstrap {
-}
+public class TestBootstrap {}

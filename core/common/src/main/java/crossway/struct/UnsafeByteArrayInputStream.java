@@ -30,7 +30,7 @@ public class UnsafeByteArrayInputStream extends InputStream {
 
     protected byte[] mData;
 
-    protected int    mPosition, mLimit, mMark = 0;
+    protected int mPosition, mLimit, mMark = 0;
 
     public UnsafeByteArrayInputStream(byte[] buf) {
         this(buf, 0, buf.length);

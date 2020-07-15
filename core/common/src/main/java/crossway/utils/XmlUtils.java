@@ -32,8 +32,7 @@ public class XmlUtils {
         return findValue(jsonStr, fieldName, valueType, xmlMapper);
     }
 
-    public static <T> T findValue(String jsonStr, String fieldName, Class<T> valueType,
-                                  ObjectMapper om) {
+    public static <T> T findValue(String jsonStr, String fieldName, Class<T> valueType, ObjectMapper om) {
         try {
             JsonNode fieldNode = om.readTree(jsonStr).findValue(fieldName);
             return om.convertValue(fieldNode, valueType);

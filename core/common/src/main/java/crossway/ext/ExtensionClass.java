@@ -17,15 +17,15 @@ public class ExtensionClass<T> implements Ordered {
     /**
      * 扩展别名,不是provider uniqueId
      */
-    protected final String alias;
+    protected final String             alias;
     /**
      * 扩展编码，必须唯一
      */
-    protected byte code;
+    protected       byte               code;
     /**
      * 是否单例
      */
-    protected boolean singleton;
+    protected       boolean            singleton;
 
     /**
      * 扩展点排序值，大的优先级高
@@ -55,8 +55,10 @@ public class ExtensionClass<T> implements Ordered {
     /**
      * 构造函数
      *
-     * @param clazz 扩展实现类名
-     * @param alias 扩展别名
+     * @param clazz
+     *     扩展实现类名
+     * @param alias
+     *     扩展别名
      */
     public ExtensionClass(Class<? extends T> clazz, String alias) {
         this.clazz = clazz;
@@ -75,8 +77,11 @@ public class ExtensionClass<T> implements Ordered {
     /**
      * 得到服务端实例对象，如果是单例则返回单例对象，如果不是则返回新创建的实例对象
      *
-     * @param argTypes 构造函数参数类型
-     * @param args     构造函数参数值
+     * @param argTypes
+     *     构造函数参数类型
+     * @param args
+     *     构造函数参数值
+     *
      * @return 扩展点对象实例 ext instance
      */
     public T getExtInstance(Class[] argTypes, Object[] args) {
@@ -95,8 +100,8 @@ public class ExtensionClass<T> implements Ordered {
                     return ClassUtils.newInstanceWithArgs(clazz, argTypes, args);
                 }
             } catch (Exception e) {
-                throw new CrossWayRuntimeException(LogCodes.getLog(LogCodeNames.ERROR_CREATE_EXT_INSTANCE.toString(),
-                        clazz.getCanonicalName()), e);
+                throw new CrossWayRuntimeException(
+                    LogCodes.getLog(LogCodeNames.ERROR_CREATE_EXT_INSTANCE.toString(), clazz.getCanonicalName()), e);
             }
         }
         throw new CrossWayRuntimeException(LogCodes.getLog(LogCodeNames.ERROR_EXTENSION_CLASS_NULL.toString()));
@@ -123,7 +128,9 @@ public class ExtensionClass<T> implements Ordered {
     /**
      * Sets code.
      *
-     * @param code the code
+     * @param code
+     *     the code
+     *
      * @return the code
      */
     public ExtensionClass setCode(byte code) {
@@ -143,7 +150,8 @@ public class ExtensionClass<T> implements Ordered {
     /**
      * Sets singleton.
      *
-     * @param singleton the singleton
+     * @param singleton
+     *     the singleton
      */
     public void setSingleton(boolean singleton) {
         this.singleton = singleton;
@@ -171,7 +179,9 @@ public class ExtensionClass<T> implements Ordered {
     /**
      * Sets order.
      *
-     * @param order the order
+     * @param order
+     *     the order
+     *
      * @return the order
      */
     public ExtensionClass setOrder(int order) {
@@ -200,7 +210,9 @@ public class ExtensionClass<T> implements Ordered {
     /**
      * Sets override.
      *
-     * @param override the override
+     * @param override
+     *     the override
+     *
      * @return the override
      */
     public ExtensionClass setOverride(boolean override) {
@@ -220,7 +232,9 @@ public class ExtensionClass<T> implements Ordered {
     /**
      * Sets rejection.
      *
-     * @param rejection the rejection
+     * @param rejection
+     *     the rejection
+     *
      * @return the rejection
      */
     public ExtensionClass setRejection(String[] rejection) {
@@ -230,15 +244,8 @@ public class ExtensionClass<T> implements Ordered {
 
     @Override
     public String toString() {
-        return "ExtensionClass{" +
-                "clazz=" + clazz +
-                ", alias='" + alias + '\'' +
-                ", code=" + code +
-                ", singleton=" + singleton +
-                ", order=" + order +
-                ", override=" + override +
-                ", rejection=" + Arrays.toString(rejection) +
-                ", instance=" + instance +
-                '}';
+        return "ExtensionClass{" + "clazz=" + clazz + ", alias='" + alias + '\'' + ", code=" + code + ", singleton="
+               + singleton + ", order=" + order + ", override=" + override + ", rejection=" + Arrays.toString(rejection)
+               + ", instance=" + instance + '}';
     }
 }

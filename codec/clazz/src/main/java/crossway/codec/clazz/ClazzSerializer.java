@@ -6,13 +6,21 @@ import crossway.ext.api.Extension;
 import crossway.impl.codec.node.ArrayNode;
 import crossway.impl.codec.node.NodeFactory;
 import crossway.impl.codec.node.ObjectNode;
-import crossway.utils.*;
+import crossway.utils.BeanUtils;
+import crossway.utils.ClassUtils;
+import crossway.utils.CommonUtils;
+import crossway.utils.ReflectUtils;
+import crossway.utils.StringUtils;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Extension("clazz")
 public class ClazzSerializer implements Serializer {

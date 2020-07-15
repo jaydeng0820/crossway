@@ -12,7 +12,8 @@ public class IOUtils {
     /**
      * 静默关闭
      *
-     * @param closeable 可关闭的
+     * @param closeable
+     *     可关闭的
      */
     public static void closeQuietly(Closeable closeable) {
         if (closeable != null) {
@@ -27,7 +28,8 @@ public class IOUtils {
     /**
      * 静默关闭 for jdk6
      *
-     * @param closeable 可关闭的
+     * @param closeable
+     *     可关闭的
      */
     public static void closeQuietly(ServerSocket closeable) {
         if (closeable != null) {
@@ -42,7 +44,8 @@ public class IOUtils {
     /**
      * 静默关闭 for jdk6
      *
-     * @param closeable 可关闭的
+     * @param closeable
+     *     可关闭的
      */
     public static void closeQuietly(Socket closeable) {
         if (closeable != null) {

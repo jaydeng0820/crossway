@@ -31,7 +31,8 @@ public interface Destroyable {
     /**
      * Do destroy with hook.
      *
-     * @param hook DestroyHook
+     * @param hook
+     *     DestroyHook
      */
     public void destroy(DestroyHook hook);
 

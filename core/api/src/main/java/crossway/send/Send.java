@@ -3,8 +3,10 @@ package crossway.send;
 import crossway.codec.Serializer;
 import crossway.codec.SerializerFactory;
 import crossway.config.SenderConfig;
+import crossway.core.request.CrossWayRequest;
+import crossway.core.response.CrossWayResponse;
+import crossway.exception.CrossWayException;
 import crossway.ext.api.Extensible;
-import crossway.invoke.Invoker;
 import crossway.utils.StringUtils;
 
 import java.util.UUID;
@@ -13,7 +15,7 @@ import java.util.UUID;
  * @author iamcyw
  **/
 @Extensible(singleton = false)
-public abstract class Send implements Invoker {
+public abstract class Send {
 
     private final SenderConfig senderConfig;
 
@@ -34,11 +36,23 @@ public abstract class Send implements Invoker {
 
     protected abstract String getDefaultSerializeType();
 
-    protected Serializer getSerializer(){
+    protected Serializer getSerializer() {
         return SerializerFactory.getSerializer(getSerializeType());
     }
 
     public int getId() {
         return id;
     }
+
+    /**
+     * 执行调用
+     *
+     * @param request
+     *     请求
+     *
+     * @return CrossWayRequest 响应
+     * @throws CrossWayException
+     *     rpc异常
+     */
+    public abstract CrossWayResponse invoke(CrossWayRequest request) throws CrossWayException;
 }

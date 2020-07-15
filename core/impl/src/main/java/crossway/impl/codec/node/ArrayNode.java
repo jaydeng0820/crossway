@@ -57,7 +57,7 @@ public class ArrayNode extends ContainerNode<ArrayNode> implements Serializable 
 
     @Override
     public Node path(String fieldName) {
-        return null;
+        return MissingNode.getInstance();
     }
 
     @Override

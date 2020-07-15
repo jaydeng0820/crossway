@@ -21,24 +21,23 @@ import java.io.Serializable;
 /**
  * Sofa RPC request base class
  * <p>
- * This class contains all data which RPC request object need
- * If want add other data you should extend this class
+ * This class contains all data which RPC request object need If want add other data you should extend this class
  *
  * @author iamcyw
  */
 public abstract class RequestBase implements Serializable {
 
-    private static final long  serialVersionUID = -7323141575870688636L;
+    private static final long serialVersionUID = -7323141575870688636L;
 
     /**
      * Method name
      */
-    private String             methodName;
+    private String methodName;
 
     /**
      * Argument type strings of method
      */
-    private String[]           methodArgSigs;
+    private String[] methodArgSigs;
 
     /**
      * Argument values of method
@@ -48,7 +47,7 @@ public abstract class RequestBase implements Serializable {
     /**
      * Target service unique name, contains interfaceName, uniqueId and etc.
      */
-    private String             targetServiceUniqueName;
+    private String targetServiceUniqueName;
 
     /**
      * Gets method name.
@@ -57,6 +56,16 @@ public abstract class RequestBase implements Serializable {
      */
     public String getMethodName() {
         return methodName;
+    }
+
+    /**
+     * Sets method name.
+     *
+     * @param methodName
+     *     the method name
+     */
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
     }
 
     /**
@@ -69,12 +78,32 @@ public abstract class RequestBase implements Serializable {
     }
 
     /**
+     * Sets method args.
+     *
+     * @param methodArgs
+     *     the method args
+     */
+    public void setMethodArgs(Object[] methodArgs) {
+        this.methodArgs = methodArgs;
+    }
+
+    /**
      * Get method arg sigs string [ ].
      *
      * @return the string [ ]
      */
     public String[] getMethodArgSigs() {
         return methodArgSigs;
+    }
+
+    /**
+     * Sets method arg sigs.
+     *
+     * @param methodArgSigs
+     *     the method arg sigs
+     */
+    public void setMethodArgSigs(String[] methodArgSigs) {
+        this.methodArgSigs = methodArgSigs;
     }
 
     /**
@@ -87,36 +116,10 @@ public abstract class RequestBase implements Serializable {
     }
 
     /**
-     * Sets method name.
-     *
-     * @param methodName the method name
-     */
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
-    /**
-     * Sets method args.
-     *
-     * @param methodArgs the method args
-     */
-    public void setMethodArgs(Object[] methodArgs) {
-        this.methodArgs = methodArgs;
-    }
-
-    /**
-     * Sets method arg sigs.
-     *
-     * @param methodArgSigs the method arg sigs
-     */
-    public void setMethodArgSigs(String[] methodArgSigs) {
-        this.methodArgSigs = methodArgSigs;
-    }
-
-    /**
      * Sets target service unique name.
      *
-     * @param targetServiceUniqueName the target service unique name
+     * @param targetServiceUniqueName
+     *     the target service unique name
      */
     public void setTargetServiceUniqueName(String targetServiceUniqueName) {
         this.targetServiceUniqueName = targetServiceUniqueName;

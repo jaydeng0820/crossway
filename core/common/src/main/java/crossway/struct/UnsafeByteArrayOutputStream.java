@@ -32,7 +32,7 @@ import java.util.Arrays;
 public class UnsafeByteArrayOutputStream extends OutputStream {
     protected byte[] mBuffer;
 
-    protected int    mCount;
+    protected int mCount;
 
     public UnsafeByteArrayOutputStream() {
         this(32);

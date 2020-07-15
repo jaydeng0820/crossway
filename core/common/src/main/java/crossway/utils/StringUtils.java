@@ -57,7 +57,9 @@ public class StringUtils {
      * StringUtils.isBlank("  bob  ") = false
      * </pre>
      *
-     * @param cs the CharSequence to check, may be null
+     * @param cs
+     *     the CharSequence to check, may be null
+     *
      * @return {@code true} if the CharSequence is null, empty or whitespace
      * @since 3.0 Changed signature from isBlank(String) to isBlank(CharSequence)
      */
@@ -84,9 +86,10 @@ public class StringUtils {
      * StringUtils.defaultString("bat") = "bat"
      * </pre>
      *
-     * @param str the String to check, may be null
-     * @return the passed in String, or the empty String if it
-     * was {@code null}
+     * @param str
+     *     the String to check, may be null
+     *
+     * @return the passed in String, or the empty String if it was {@code null}
      * @see String#valueOf(Object)
      */
     public static String defaultString(final Object str) {
@@ -96,8 +99,11 @@ public class StringUtils {
     /**
      * 对象转string
      *
-     * @param o          对象
-     * @param defaultVal 默认值
+     * @param o
+     *     对象
+     * @param defaultVal
+     *     默认值
+     *
      * @return 不为null执行toString方法
      */
     public static String toString(Object o, String defaultVal) {
@@ -107,7 +113,9 @@ public class StringUtils {
     /**
      * 对象转string
      *
-     * @param o 对象
+     * @param o
+     *     对象
+     *
      * @return 不为null执行toString方法
      */
     public static String toString(Object o) {
@@ -119,11 +127,13 @@ public class StringUtils {
     }
 
     /**
-     * 按分隔符分隔的数组，包含空值<br>
-     * 例如 "1,2,,3," 返回 [1,2,,3,] 5个值
+     * 按分隔符分隔的数组，包含空值<br> 例如 "1,2,,3," 返回 [1,2,,3,] 5个值
      *
-     * @param src       原始值
-     * @param separator 分隔符
+     * @param src
+     *     原始值
+     * @param separator
+     *     分隔符
+     *
      * @return 字符串数组
      */
     public static String[] split(String src, String separator) {
@@ -137,11 +147,11 @@ public class StringUtils {
     }
 
     /**
-     * 按逗号或者分号分隔的数组，排除空字符<br>
-     * 例如 " 1,2 ,, 3 , " 返回 [1,2,3] 3个值<br>
-     * " 1;2 ;; 3 ; " 返回 [1,2,3] 3个值<br>
+     * 按逗号或者分号分隔的数组，排除空字符<br> 例如 " 1,2 ,, 3 , " 返回 [1,2,3] 3个值<br> " 1;2 ;; 3 ; " 返回 [1,2,3] 3个值<br>
      *
-     * @param src 原始值
+     * @param src
+     *     原始值
+     *
      * @return 字符串数组
      */
     public static String[] splitWithCommaOrSemicolon(String src) {

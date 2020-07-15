@@ -1,7 +1,6 @@
 package crossway.impl.send;
 
 import crossway.codec.Serializer;
-import crossway.codec.SerializerFactory;
 import crossway.config.SenderConfig;
 import crossway.core.request.CrossWayRequest;
 import crossway.core.response.CrossWayResponse;

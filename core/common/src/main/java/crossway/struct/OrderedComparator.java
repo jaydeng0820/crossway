@@ -24,7 +24,9 @@ import java.util.Comparator;
 /**
  * Default comparator of sortable.
  *
- * @param <T> the type parameter
+ * @param <T>
+ *     the type parameter
+ *
  * @author iamcyw
  */
 public class OrderedComparator<T extends Ordered> implements Comparator<T>, Serializable {
@@ -44,7 +46,8 @@ public class OrderedComparator<T extends Ordered> implements Comparator<T>, Seri
     /**
      * Instantiates a new Ordered comparator.
      *
-     * @param smallToLarge the small to large
+     * @param smallToLarge
+     *     the small to large
      */
     public OrderedComparator(boolean smallToLarge) {
         this.order = smallToLarge;
@@ -53,7 +56,6 @@ public class OrderedComparator<T extends Ordered> implements Comparator<T>, Seri
     @Override
     public int compare(T o1, T o2) {
         // order一样的情况下，顺序不变
-        return order ? o1.getOrder() - o2.getOrder() :
-            o2.getOrder() - o1.getOrder();
+        return order ? o1.getOrder() - o2.getOrder() : o2.getOrder() - o1.getOrder();
     }
 }

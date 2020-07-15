@@ -27,7 +27,7 @@ public class CrossWayException extends RuntimeException {
     /**
      * 异常类型
      */
-    protected int errorType = ErrorType.UNKNOWN;
+    protected            int  errorType        = ErrorType.UNKNOWN;
 
     protected CrossWayException() {
 

@@ -11,7 +11,9 @@ public class ClassUtils {
     /**
      * 根据类名加载Class
      *
-     * @param className 类名
+     * @param className
+     *     类名
+     *
      * @return Class
      */
     public static Class forName(String className) {
@@ -34,8 +36,11 @@ public class ClassUtils {
     /**
      * 根据类名加载Class
      *
-     * @param className  类名
-     * @param initialize 是否初始化
+     * @param className
+     *     类名
+     * @param initialize
+     *     是否初始化
+     *
      * @return Class
      */
     public static Class forName(String className, boolean initialize) {
@@ -49,7 +54,9 @@ public class ClassUtils {
     /**
      * 得到基本类型的默认值
      *
-     * @param clazz Class类
+     * @param clazz
+     *     Class类
+     *
      * @return 默认值
      */
     public static Object getDefaultPrimitiveValue(Class clazz) {
@@ -77,7 +84,9 @@ public class ClassUtils {
     /**
      * 得到包装类的默认值
      *
-     * @param clazz Class类
+     * @param clazz
+     *     Class类
+     *
      * @return 默认值
      */
     public static <T> T getDefaultWrapperValue(Class<T> clazz) {
@@ -104,10 +113,14 @@ public class ClassUtils {
     /**
      * 实例化一个对象(只检测默认构造函数，其它不管）
      *
-     * @param clazz 对象类
-     * @param <T>   对象具体类
+     * @param clazz
+     *     对象类
+     * @param <T>
+     *     对象具体类
+     *
      * @return 对象实例
-     * @throws CrossWayRuntimeException 没有找到方法，或者无法处理，或者初始化方法异常等
+     * @throws CrossWayRuntimeException
+     *     没有找到方法，或者无法处理，或者初始化方法异常等
      */
     public static <T> T newInstance(Class<T> clazz) throws CrossWayRuntimeException {
         if (clazz.isPrimitive()) {
@@ -133,8 +146,7 @@ public class ClassUtils {
             // 不行的话，找一个最少参数的构造函数
             Constructor<T>[] constructors = (Constructor<T>[]) clazz.getDeclaredConstructors();
             if (constructors == null || constructors.length == 0) {
-                throw new CrossWayRuntimeException("The " + clazz.getCanonicalName()
-                        + " has no default constructor!");
+                throw new CrossWayRuntimeException("The " + clazz.getCanonicalName() + " has no default constructor!");
             }
             Constructor<T> constructor = constructors[0];
             if (constructor.getParameterTypes().length > 0) {
@@ -165,10 +177,15 @@ public class ClassUtils {
     /**
      * 实例化一个对象(根据参数自动检测构造方法）
      *
-     * @param clazz    对象类
-     * @param argTypes 构造函数需要的参数
-     * @param args     构造函数需要的参数
-     * @param <T>      对象具体类
+     * @param clazz
+     *     对象类
+     * @param argTypes
+     *     构造函数需要的参数
+     * @param args
+     *     构造函数需要的参数
+     * @param <T>
+     *     对象具体类
+     *
      * @return 对象实例
      */
     public static <T> T newInstanceWithArgs(Class<T> clazz, Class<?>[] argTypes, Object[] args) {
@@ -183,8 +200,9 @@ public class ClassUtils {
             } else {
                 Constructor<T>[] constructors = (Constructor<T>[]) clazz.getDeclaredConstructors();
                 if (constructors == null || constructors.length == 0) {
-                    throw new CrossWayRuntimeException("The " + clazz.getCanonicalName()
-                            + " has no constructor with argTypes :" + Arrays.toString(argTypes));
+                    throw new CrossWayRuntimeException(
+                        "The " + clazz.getCanonicalName() + " has no constructor with argTypes :" + Arrays.toString(
+                            argTypes));
                 }
                 Constructor<T> constructor = null;
                 for (Constructor<T> c : constructors) {
@@ -206,8 +224,9 @@ public class ClassUtils {
                     }
                 }
                 if (constructor == null) {
-                    throw new CrossWayRuntimeException("The " + clazz.getCanonicalName()
-                            + " has no constructor with argTypes :" + Arrays.toString(argTypes));
+                    throw new CrossWayRuntimeException(
+                        "The " + clazz.getCanonicalName() + " has no constructor with argTypes :" + Arrays.toString(
+                            argTypes));
                 } else {
                     constructor.setAccessible(true);
                     Object[] newArgs = new Object[args.length + 1];

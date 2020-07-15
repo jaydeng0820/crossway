@@ -1,6 +1,5 @@
 package crossway.codec.json;
 
-import crossway.codec.node.Node;
 import crossway.impl.codec.node.ArrayNode;
 import crossway.impl.codec.node.ObjectNode;
 import crossway.utils.JsonUtils;
@@ -9,7 +8,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +33,8 @@ class JsonSerializerTest {
         ArrayNode arrayNode = (ArrayNode) node.get("list");
 
         System.out.println(jsonSerializer.decode(node, null));
-        Assertions.assertEquals(jsonSerializer.decode(node,null), JsonUtils.toString(data));
-        
-        
+        Assertions.assertEquals(jsonSerializer.decode(node, null), JsonUtils.toString(data));
+
+
     }
 }

@@ -77,8 +77,8 @@ public abstract class ContainerNode<T extends ContainerNode<T>> extends BaseNode
     }
 
     /**
-     * Factory method that constructs and returns an {@link ArrayNode} with an
-     * initial capacity Construction is done using registered {@link NodeFactory}
+     * Factory method that constructs and returns an {@link ArrayNode} with an initial capacity Construction is done
+     * using registered {@link NodeFactory}
      *
      * @param capacity
      *     the initial capacity of the ArrayNode
@@ -178,9 +178,14 @@ public abstract class ContainerNode<T extends ContainerNode<T>> extends BaseNode
     }
 
     @Override
-    public final BinaryNode binaryNode(byte[] data) { return _nodeFactory.binaryNode(data); }
+    public final BinaryNode binaryNode(byte[] data) {
+        return _nodeFactory.binaryNode(data);
+    }
+
     @Override
-    public final BinaryNode binaryNode(byte[] data, int offset, int length) { return _nodeFactory.binaryNode(data, offset, length); }
+    public final BinaryNode binaryNode(byte[] data, int offset, int length) {
+        return _nodeFactory.binaryNode(data, offset, length);
+    }
 
 
     /*

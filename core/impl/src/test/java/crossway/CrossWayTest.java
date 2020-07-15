@@ -6,16 +6,19 @@ import crossway.impl.listen.CrossWayListener;
 import crossway.impl.send.CrossWaySend;
 import crossway.impl.send.CrossWaySendEvent;
 import crossway.transport.Transport;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author iamcyw
  **/
+@Slf4j
 public class CrossWayTest {
 
     @Test
     public void testCrossWay() throws Exception {
+        log.info("start");
         SenderConfig senderConfig = new SenderConfig();
         CrossWaySend invoker = (CrossWaySend) senderConfig.refer();
 
@@ -32,7 +35,12 @@ public class CrossWayTest {
             }
         });
 
-        Assertions.assertEquals("bbb", listener.request("aaa"));
+        listener.async("aaa").thenAccept(o -> {
+            log.info("recived start");
+            Assertions.assertEquals("bbb", o);
+            log.info("recived end");
+        });
 
+        log.info("end");
     }
 }

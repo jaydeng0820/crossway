@@ -2,7 +2,6 @@ package crossway.bootstrap;
 
 import crossway.config.SenderConfig;
 import crossway.ext.api.Extensible;
-import crossway.filter.FilterInvoker;
 import crossway.send.Send;
 
 /**

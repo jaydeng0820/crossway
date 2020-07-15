@@ -2,10 +2,18 @@ package crossway.transport;
 
 import crossway.config.ListenerConfig;
 import crossway.config.SenderConfig;
-import crossway.filter.FilterChainFactory;
-import crossway.filter.FilterInvoker;
-import crossway.filter.SenderInvoker;
+import crossway.core.request.CrossWayRequest;
+import crossway.core.response.CrossWayResponse;
+import crossway.exception.CrossWayException;
+import crossway.exception.WayErrorType;
+import crossway.ext.ExtensionClass;
+import crossway.ext.ExtensionLoaderFactory;
+import crossway.filter.Filter;
 import crossway.utils.CommonUtils;
+
+import java.util.Collection;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 /**
  * description:
@@ -17,7 +25,6 @@ import crossway.utils.CommonUtils;
 public class Transport {
     private final ListenerConfig listenerConfig;
     private final SenderConfig   senderConfig;
-    private       FilterInvoker  filterInvoker;
     private       String[]       filters = new String[]{"log"};
 
     public Transport(ListenerConfig listenerConfig, SenderConfig senderConfig, String... filters) {
@@ -29,16 +36,45 @@ public class Transport {
         init();
     }
 
-
     private void init() {
-        listenerConfig.setTransport(this);
-        senderConfig.setTransport(this);
+        if (listenerConfig != null) {
+            listenerConfig.setTransport(this);
+        }
+        if (senderConfig != null) {
+            senderConfig.setTransport(this);
+        }
     }
 
-    public FilterInvoker getSend() {
-        if (filterInvoker == null) {
-            filterInvoker = FilterChainFactory.filterChain(new SenderInvoker(senderConfig), filters);
+    public <T> CompletableFuture<CrossWayResponse> apply(Supplier<CrossWayRequest> supplier) {
+        CompletableFuture<CrossWayRequest> future = CompletableFuture.supplyAsync(supplier);
+        return apply(future);
+    }
+
+    public CompletableFuture<CrossWayResponse> apply(CompletableFuture<CrossWayRequest> future) {
+        for (ExtensionClass<Filter> filterExtensionClass : getFilters()) {
+            Filter filter = filterExtensionClass.getExtInstance();
+            future = future.thenCompose(request -> CompletableFuture.supplyAsync(() -> filter.request(request)));
         }
-        return filterInvoker;
+        CompletableFuture<CrossWayResponse> responseCompletableFuture = future.thenApplyAsync(request -> {
+            CrossWayResponse response = new CrossWayResponse();
+            try {
+                response = senderConfig.refer().invoke(request);
+            } catch (Throwable e) {
+                response.setErrorMsg(e.getMessage());
+                response.setError(new CrossWayException(WayErrorType.SERVER_SEND, e));
+            }
+            return response;
+        });
+
+        for (ExtensionClass<Filter> filterExtensionClass : getFilters()) {
+            Filter filter = filterExtensionClass.getExtInstance();
+            responseCompletableFuture = responseCompletableFuture.thenCompose(
+                response -> CompletableFuture.supplyAsync(() -> filter.response(response)));
+        }
+        return responseCompletableFuture;
+    }
+
+    private Collection<ExtensionClass<Filter>> getFilters() {
+        return ExtensionLoaderFactory.getExtensionLoader(Filter.class).getAllExtensions().values();
     }
 }

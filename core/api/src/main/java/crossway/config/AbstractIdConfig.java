@@ -45,7 +45,8 @@ public class AbstractIdConfig<S extends AbstractIdConfig> implements Serializabl
     /**
      * Sets id.
      *
-     * @param id the id
+     * @param id
+     *     the id
      */
     public S setId(String id) {
         this.id = id;

@@ -5,13 +5,22 @@ import crossway.api.Ordered;
 import crossway.exception.CrossWayRuntimeException;
 import crossway.log.LogCodes;
 import crossway.struct.OrderedComparator;
-import crossway.utils.*;
+import crossway.utils.ClassLoaderUtils;
+import crossway.utils.CommonUtils;
+import crossway.utils.CompatibleTypeUtils;
+import crossway.utils.FileUtils;
+import crossway.utils.JsonUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -23,12 +32,13 @@ public class CrossWayConfigs {
     /**
      * 全部配置
      */
-    private final static ConcurrentMap<String, Object> CFG = new ConcurrentHashMap<String, Object>();
+    private final static ConcurrentMap<String, Object>                       CFG          =
+        new ConcurrentHashMap<String, Object>();
     /**
      * 配置变化监听器
      */
-    private final static ConcurrentMap<String, List<CrossWayConfigListener>> CFG_LISTENER = new ConcurrentHashMap<String,
-        List<CrossWayConfigListener>>();
+    private final static ConcurrentMap<String, List<CrossWayConfigListener>> CFG_LISTENER =
+        new ConcurrentHashMap<String, List<CrossWayConfigListener>>();
 
     static {
         init(); // 加载配置文件
@@ -55,13 +65,16 @@ public class CrossWayConfigs {
     /**
      * 加载自定义配置文件
      *
-     * @param fileName 文件名
-     * @throws IOException 加载异常
+     * @param fileName
+     *     文件名
+     *
+     * @throws IOException
+     *     加载异常
      */
     private static void loadCustom(String fileName) throws IOException {
         ClassLoader classLoader = ClassLoaderUtils.getClassLoader(CrossWayConfigs.class);
-        Enumeration<URL> urls = classLoader != null ? classLoader.getResources(fileName)
-            : ClassLoader.getSystemResources(fileName);
+        Enumeration<URL> urls = classLoader != null ? classLoader.getResources(fileName) :
+                                ClassLoader.getSystemResources(fileName);
         if (urls != null) { // 可能存在多个文件
             List<CfgFile> allFile = new ArrayList<CfgFile>();
             while (urls.hasMoreElements()) {
@@ -99,8 +112,10 @@ public class CrossWayConfigs {
     /**
      * Put value.
      *
-     * @param key      the key
-     * @param newValue the new value
+     * @param key
+     *     the key
+     * @param newValue
+     *     the new value
      */
     public static void putValue(String key, Object newValue) {
         Object oldValue = CFG.get(key);
@@ -118,7 +133,8 @@ public class CrossWayConfigs {
     /**
      * Remove value
      *
-     * @param key Key
+     * @param key
+     *     Key
      */
     @JustForTest
     synchronized static void removeValue(String key) {
@@ -137,7 +153,9 @@ public class CrossWayConfigs {
     /**
      * Gets boolean value.
      *
-     * @param primaryKey the primary key
+     * @param primaryKey
+     *     the primary key
+     *
      * @return the boolean value
      */
     public static boolean getBooleanValue(String primaryKey) {
@@ -152,8 +170,11 @@ public class CrossWayConfigs {
     /**
      * Gets boolean value.
      *
-     * @param primaryKey   the primary key
-     * @param secondaryKey the secondary key
+     * @param primaryKey
+     *     the primary key
+     * @param secondaryKey
+     *     the secondary key
+     *
      * @return the boolean value
      */
     public static boolean getBooleanValue(String primaryKey, String secondaryKey) {
@@ -161,8 +182,8 @@ public class CrossWayConfigs {
         if (val == null) {
             val = CFG.get(secondaryKey);
             if (val == null) {
-                throw new CrossWayRuntimeException(LogCodes.getLog(LogCodes.ERROR_NOT_FOUND_KEY, primaryKey + "/" +
-                    secondaryKey));
+                throw new CrossWayRuntimeException(
+                    LogCodes.getLog(LogCodes.ERROR_NOT_FOUND_KEY, primaryKey + "/" + secondaryKey));
             }
         }
         return Boolean.valueOf(val.toString());
@@ -171,7 +192,9 @@ public class CrossWayConfigs {
     /**
      * Gets int value.
      *
-     * @param primaryKey the primary key
+     * @param primaryKey
+     *     the primary key
+     *
      * @return the int value
      */
     public static int getIntValue(String primaryKey) {
@@ -186,8 +209,11 @@ public class CrossWayConfigs {
     /**
      * Gets int value.
      *
-     * @param primaryKey   the primary key
-     * @param secondaryKey the secondary key
+     * @param primaryKey
+     *     the primary key
+     * @param secondaryKey
+     *     the secondary key
+     *
      * @return the int value
      */
     public static int getIntValue(String primaryKey, String secondaryKey) {
@@ -195,8 +221,8 @@ public class CrossWayConfigs {
         if (val == null) {
             val = CFG.get(secondaryKey);
             if (val == null) {
-                throw new CrossWayRuntimeException(LogCodes.getLog(LogCodes.ERROR_NOT_FOUND_KEY, primaryKey + "/" +
-                    secondaryKey));
+                throw new CrossWayRuntimeException(
+                    LogCodes.getLog(LogCodes.ERROR_NOT_FOUND_KEY, primaryKey + "/" + secondaryKey));
             }
         }
         return Integer.parseInt(val.toString());
@@ -205,9 +231,13 @@ public class CrossWayConfigs {
     /**
      * Gets enum value.
      *
-     * @param <T>        the type parameter
-     * @param primaryKey the primary key
-     * @param enumClazz  the enum clazz
+     * @param <T>
+     *     the type parameter
+     * @param primaryKey
+     *     the primary key
+     * @param enumClazz
+     *     the enum clazz
+     *
      * @return the enum value
      */
     public static <T extends Enum<T>> T getEnumValue(String primaryKey, Class<T> enumClazz) {
@@ -222,7 +252,9 @@ public class CrossWayConfigs {
     /**
      * Gets string value.
      *
-     * @param primaryKey the primary key
+     * @param primaryKey
+     *     the primary key
+     *
      * @return the string value
      */
     public static String getStringValue(String primaryKey) {
@@ -237,8 +269,11 @@ public class CrossWayConfigs {
     /**
      * Gets string value.
      *
-     * @param primaryKey   the primary key
-     * @param secondaryKey the secondary key
+     * @param primaryKey
+     *     the primary key
+     * @param secondaryKey
+     *     the secondary key
+     *
      * @return the string value
      */
     public static String getStringValue(String primaryKey, String secondaryKey) {
@@ -246,8 +281,8 @@ public class CrossWayConfigs {
         if (val == null) {
             val = (String) CFG.get(secondaryKey);
             if (val == null) {
-                throw new CrossWayRuntimeException(LogCodes.getLog(LogCodes.ERROR_NOT_FOUND_KEY, primaryKey + "/" +
-                    secondaryKey));
+                throw new CrossWayRuntimeException(
+                    LogCodes.getLog(LogCodes.ERROR_NOT_FOUND_KEY, primaryKey + "/" + secondaryKey));
             } else {
                 return val;
             }
@@ -259,7 +294,9 @@ public class CrossWayConfigs {
     /**
      * Gets list value.
      *
-     * @param primaryKey the primary key
+     * @param primaryKey
+     *     the primary key
+     *
      * @return the list value
      */
     public static List getListValue(String primaryKey) {
@@ -274,9 +311,13 @@ public class CrossWayConfigs {
     /**
      * Gets or default value.
      *
-     * @param <T>          the type parameter
-     * @param primaryKey   the primary key
-     * @param defaultValue the default value
+     * @param <T>
+     *     the type parameter
+     * @param primaryKey
+     *     the primary key
+     * @param defaultValue
+     *     the default value
+     *
      * @return the or default value
      */
     public static <T> T getOrDefaultValue(String primaryKey, T defaultValue) {
@@ -292,8 +333,11 @@ public class CrossWayConfigs {
     /**
      * 订阅配置变化
      *
-     * @param key      关键字
-     * @param listener 配置监听器
+     * @param key
+     *     关键字
+     * @param listener
+     *     配置监听器
+     *
      * @see CrossWayOptions
      */
     public static synchronized void subscribe(String key, CrossWayConfigListener listener) {
@@ -308,8 +352,11 @@ public class CrossWayConfigs {
     /**
      * 取消订阅配置变化
      *
-     * @param key      关键字
-     * @param listener 配置监听器
+     * @param key
+     *     关键字
+     * @param listener
+     *     配置监听器
+     *
      * @see CrossWayOptions
      */
     public static synchronized void unSubscribe(String key, CrossWayConfigListener listener) {
@@ -325,27 +372,31 @@ public class CrossWayConfigs {
     /**
      * 值是否发生变化
      *
-     * @param oldObj 旧值
-     * @param newObj 新值
+     * @param oldObj
+     *     旧值
+     * @param newObj
+     *     新值
+     *
      * @return 是否变化 boolean
      */
     protected static boolean changed(Object oldObj, Object newObj) {
-        return oldObj == null ?
-            newObj != null :
-            !oldObj.equals(newObj);
+        return oldObj == null ? newObj != null : !oldObj.equals(newObj);
     }
 
     /**
      * 配置变更会拿到通知
      *
-     * @param <T> the type parameter
+     * @param <T>
+     *     the type parameter
      */
     public interface CrossWayConfigListener<T> {
         /**
          * On change.
          *
-         * @param oldValue the old value
-         * @param newValue the new value
+         * @param oldValue
+         *     the old value
+         * @param newValue
+         *     the new value
          */
         public void onChange(T oldValue, T newValue);
     }
@@ -361,9 +412,12 @@ public class CrossWayConfigs {
         /**
          * Instantiates a new Cfg file.
          *
-         * @param url   the url
-         * @param order the order
-         * @param map   the map
+         * @param url
+         *     the url
+         * @param order
+         *     the order
+         * @param map
+         *     the map
          */
         public CfgFile(URL url, int order, Map map) {
             this.url = url;
