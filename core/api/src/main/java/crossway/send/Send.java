@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * @author iamcyw
  **/
-@Extensible(singleton = false)
+@Extensible
 public abstract class Send {
 
     private final SenderConfig senderConfig;

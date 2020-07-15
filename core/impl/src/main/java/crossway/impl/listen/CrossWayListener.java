@@ -41,13 +41,13 @@ public class CrossWayListener extends Listener {
     }
 
     public CompletableFuture<Object> async(Object request) {
-        return getConfig().getTransport().apply(CompletableFuture.supplyAsync(() -> {
+        return getConfig().getTransport().apply(() -> {
             Serializer serializer = getSerializer();
 
             CrossWayRequest crossWayRequest = new CrossWayRequest();
             crossWayRequest.setData(serializer.encode(request, null));
             return crossWayRequest;
-        })).thenApplyAsync(response -> {
+        }).thenApplyAsync(response -> {
             if (response.isError()) {
                 throw (RuntimeException) response.getError();
             }

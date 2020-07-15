@@ -53,7 +53,10 @@ public class Transport {
     public CompletableFuture<CrossWayResponse> apply(CompletableFuture<CrossWayRequest> future) {
         for (ExtensionClass<Filter> filterExtensionClass : getFilters()) {
             Filter filter = filterExtensionClass.getExtInstance();
-            future = future.thenCompose(request -> CompletableFuture.supplyAsync(() -> filter.request(request)));
+            future = future.thenCompose(request -> CompletableFuture.supplyAsync(() -> {
+                filter.request(request);
+                return request;
+            }));
         }
         CompletableFuture<CrossWayResponse> responseCompletableFuture = future.thenApplyAsync(request -> {
             CrossWayResponse response = new CrossWayResponse();
@@ -69,7 +72,10 @@ public class Transport {
         for (ExtensionClass<Filter> filterExtensionClass : getFilters()) {
             Filter filter = filterExtensionClass.getExtInstance();
             responseCompletableFuture = responseCompletableFuture.thenCompose(
-                response -> CompletableFuture.supplyAsync(() -> filter.response(response)));
+                response -> CompletableFuture.supplyAsync(() -> {
+                    filter.response(response);
+                    return response;
+                }));
         }
         return responseCompletableFuture;
     }

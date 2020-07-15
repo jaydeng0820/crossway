@@ -19,13 +19,12 @@ import lombok.extern.slf4j.Slf4j;
 public class LogFilter implements Filter {
 
     @Override
-    public CrossWayRequest request(CrossWayRequest request) {
+    public void request(CrossWayRequest request) {
         log.info(SerializerFactory.getSerializer("string").decode(request.getData(), null).toString());
-        return request;
     }
 
     @Override
-    public CrossWayResponse response(CrossWayResponse response) {
-        return response;
+    public void response(CrossWayResponse response) {
+
     }
 }

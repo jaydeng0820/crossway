@@ -12,7 +12,7 @@ import crossway.ext.api.Extensible;
 @Extensible(singleton = true)
 public interface Filter {
 
-    public abstract CrossWayRequest request(CrossWayRequest request);
+    public abstract void request(CrossWayRequest request);
 
-    public abstract CrossWayResponse response(CrossWayResponse response);
+    public abstract void response(CrossWayResponse response);
 }

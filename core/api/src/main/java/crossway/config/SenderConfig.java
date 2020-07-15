@@ -37,6 +37,8 @@ public class SenderConfig extends AbstractServiceConfig<SenderConfig> implements
 
     protected Transport transport;
 
+    protected boolean isCluster;
+
     public String getBootstrap() {
         return bootstrap;
     }
